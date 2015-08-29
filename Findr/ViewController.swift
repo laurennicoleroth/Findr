@@ -10,7 +10,6 @@ import UIKit
 import Parse
 
 class ViewController: UIViewController, FBSDKLoginButtonDelegate {
-    @IBOutlet weak var facebookLogin: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
