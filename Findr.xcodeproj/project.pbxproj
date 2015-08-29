@@ -429,6 +429,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"/Users/laurennicoleroth/Downloads/parse-library-1.8.2",
+					"$(PROJECT_DIR)/Findr",
+				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
 					"/Users/laurennicoleroth/Downloads/FacebookSDKs-iOS-20150813",
 					"(2)",
 					"/Users/laurennicoleroth/Downloads/parse-library-1.8.2",
@@ -449,8 +454,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/laurennicoleroth/Downloads/FacebookSDKs-iOS-20150813",
-					"(2)",
 					"/Users/laurennicoleroth/Downloads/parse-library-1.8.2",
 					"$(PROJECT_DIR)/Findr",
 				);
@@ -514,6 +517,7 @@
 				9674E8D11B90EE3900A281AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9674E8D21B90EE3900A281AA /* Build configuration list for PBXNativeTarget "FindrTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +526,7 @@
 				9674E8D41B90EE3900A281AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
