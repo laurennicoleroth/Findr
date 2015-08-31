@@ -12,6 +12,8 @@ import Bolts
 import ParseFacebookUtilsV4
 
 class ViewController: UIViewController {
+    
+    var xFromCenter:CGFloat = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,8 @@ class ViewController: UIViewController {
         positiveSingle.addGestureRecognizer(gesture)
         
         positiveSingle.userInteractionEnabled = true
+        
+        
     }
     
     
@@ -69,9 +73,14 @@ class ViewController: UIViewController {
         let translation = gesture.translationInView(self.view)
         var positiveSingle = gesture.view!
         
+        xFromCenter += translation.x
+        
         positiveSingle.center = CGPoint(x: positiveSingle.center.x + translation.x, y: positiveSingle.center.y + translation.y)
         
         gesture.setTranslation(CGPointZero, inView: self.view)
+        
+        var rotation:CGAffineTransform = CGAffineTransformMakeRotation(xFromCenter / 200)
+        positiveSingle.transform = rotation
         
         println("Dragged")
     }
