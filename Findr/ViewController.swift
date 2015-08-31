@@ -18,12 +18,12 @@ class ViewController: UIViewController {
         
         facebookLogin()
         
-        var positiveSingle: UILabel = UILabel(frame: CGRectMake(self.view.bounds.width / 2 - 100, self.view.bounds.height / 2 - 100, 200, 200))
-        positiveSingle.text = "Positive Single"
+        var positiveSingle: UILabel = UILabel(frame: CGRectMake(self.view.bounds.width / 2 - 100, self.view.bounds.height / 2 - 50, 200, 100))
+        positiveSingle.text = "Drag Me!"
         positiveSingle.textAlignment = NSTextAlignment.Center
         self.view.addSubview(positiveSingle)
         
-        var gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged"))
+        var gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
         positiveSingle.addGestureRecognizer(gesture)
         
         positiveSingle.userInteractionEnabled = true
@@ -64,7 +64,15 @@ class ViewController: UIViewController {
         }
     }
     
-    func wasDragged() {
+    func wasDragged(gesture: UIPanGestureRecognizer) {
+        
+        let translation = gesture.translationInView(self.view)
+        var positiveSingle = gesture.view!
+        
+        positiveSingle.center = CGPoint(x: positiveSingle.center.x + translation.x, y: positiveSingle.center.y + translation.y)
+        
+        gesture.setTranslation(CGPointZero, inView: self.view)
+        
         println("Dragged")
     }
 
