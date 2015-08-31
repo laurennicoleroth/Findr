@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         facebookLogin()
         
         var positiveSingle: UILabel = UILabel(frame: CGRectMake(self.view.bounds.width / 2 - 100, self.view.bounds.height / 2 - 50, 200, 100))
-        positiveSingle.text = "Drag Me!"
+        positiveSingle.text = "Positive Single"
         positiveSingle.textAlignment = NSTextAlignment.Center
         self.view.addSubview(positiveSingle)
         
@@ -75,6 +75,8 @@ class ViewController: UIViewController {
         
         xFromCenter += translation.x
         
+        var scale = min(100 / abs(xFromCenter), 1)
+        
         positiveSingle.center = CGPoint(x: positiveSingle.center.x + translation.x, y: positiveSingle.center.y + translation.y)
         
         gesture.setTranslation(CGPointZero, inView: self.view)
@@ -82,7 +84,16 @@ class ViewController: UIViewController {
         var rotation:CGAffineTransform = CGAffineTransformMakeRotation(xFromCenter / 200)
         positiveSingle.transform = rotation
         
-        println("Dragged")
+        var stretch:CGAffineTransform = CGAffineTransformScale(rotation, scale, scale)
+        
+        positiveSingle.transform = stretch
+        
+        if positiveSingle.center.x < 100 {
+            println("Not Chosen")
+        } else if positiveSingle.center.x > self.view.bounds.width - 100 {
+            println("Chosen")
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
