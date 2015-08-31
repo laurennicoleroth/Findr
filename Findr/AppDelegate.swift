@@ -23,6 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId("3Zvf6r8ZMEmNjyJGdK521qvO1fXWO15PBYwlxqVD", clientKey: "dLiyihlVLxzx0JSNNWBaayiIjDXcv2KTiUQ5zMBo")
         
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+        
+        //Push Notifications
+        var pushSettings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert, categories: nil)
+        application.registerUserNotificationSettings(pushSettings)
+        application.registerForRemoteNotifications()
 
         return true
     }
