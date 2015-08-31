@@ -12,4 +12,10 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
+#import <Parse/Parse.h>
+#import <Parse/PFObject+Subclass.h>
+#import <ParseUI/ParseUI.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+#import <Bolts/Bolts.h>
+
 #endif
