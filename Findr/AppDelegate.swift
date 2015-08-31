@@ -18,19 +18,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        //Parse and Facebook setup
         Parse.enableLocalDatastore()
-        
         Parse.setApplicationId("3Zvf6r8ZMEmNjyJGdK521qvO1fXWO15PBYwlxqVD", clientKey: "dLiyihlVLxzx0JSNNWBaayiIjDXcv2KTiUQ5zMBo")
-        
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
-        //Push Notifications
+        //Push Notification Setup
         var pushSettings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert, categories: nil)
         application.registerUserNotificationSettings(pushSettings)
         application.registerForRemoteNotifications()
 
         return true
     }
+    
+    func application( application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData ) {
+        println("Success")
+        
+        
+    }
+    
+    func application( application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError ) {
+        //You will get this message unless running on a registered device
+        println("Fail!")
+        
+    }
+
 
     func applicationWillResignActive(application: UIApplication) {
 

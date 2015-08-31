@@ -18,6 +18,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let push = PFPush()
+        push.setChannel("Match")
+        push.setMessage("You just matched!")
+        push.sendPushInBackground()
+        
         facebookLogin()
         
         var positiveSingle: UILabel = UILabel(frame: CGRectMake(self.view.bounds.width / 2 - 100, self.view.bounds.height / 2 - 50, 200, 100))
