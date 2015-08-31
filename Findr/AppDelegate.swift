@@ -23,19 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId("3Zvf6r8ZMEmNjyJGdK521qvO1fXWO15PBYwlxqVD", clientKey: "dLiyihlVLxzx0JSNNWBaayiIjDXcv2KTiUQ5zMBo")
         
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+
         return true
     }
-    
-    func application(application: UIApplication,
-        openURL url: NSURL,
-        sourceApplication: String?,
-        annotation: AnyObject?) -> Bool {
-            return       FBSDKApplicationDelegate.sharedInstance().application(application,
-                openURL: url,
-                sourceApplication: sourceApplication,
-                annotation: annotation)
-    }
-
 
     func applicationWillResignActive(application: UIApplication) {
 
@@ -47,6 +37,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(application: UIApplication) {
 
+    }
+    
+    func application(application: UIApplication,
+        openURL url: NSURL,
+        sourceApplication: String?,
+        annotation: AnyObject?) -> Bool {
+            return       FBSDKApplicationDelegate.sharedInstance().application(application,
+                openURL: url,
+                sourceApplication: sourceApplication,
+                annotation: annotation)
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
