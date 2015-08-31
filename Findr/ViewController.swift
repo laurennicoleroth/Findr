@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         
         let push = PFPush()
         push.setChannel("Match")
-        push.setMessage("You just matched!")
+        push.setMessage("You and someone else just matched!")
         push.sendPushInBackground()
         
         facebookLogin()
