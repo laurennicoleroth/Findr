@@ -23,22 +23,19 @@ class ViewController: UIViewController {
         push.setMessage("You and someone else just matched!")
         push.sendPushInBackground()
         
-        facebookLogin()
-        
-        var positiveSingle: UILabel = UILabel(frame: CGRectMake(self.view.bounds.width / 2 - 100, self.view.bounds.height / 2 - 50, 200, 100))
-        positiveSingle.text = "Positive Single"
-        positiveSingle.textAlignment = NSTextAlignment.Center
-        self.view.addSubview(positiveSingle)
-        
-        var gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
-        positiveSingle.addGestureRecognizer(gesture)
-        
-        positiveSingle.userInteractionEnabled = true
+//        var positiveSingle: UILabel = UILabel(frame: CGRectMake(self.view.bounds.width / 2 - 100, self.view.bounds.height / 2 - 50, 200, 100))
+//        positiveSingle.text = "Positive Single"
+//        positiveSingle.textAlignment = NSTextAlignment.Center
+//        self.view.addSubview(positiveSingle)
+//        
+//        var gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
+//        positiveSingle.addGestureRecognizer(gesture)
+//        
+//        positiveSingle.userInteractionEnabled = true
         
     }
     
-    
-    @IBAction func facebookLogin() {
+    @IBAction func signIn(sender: AnyObject) {
         let permissions = ["public_profile", "email"]
         
         PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions as [AnyObject]) {
@@ -112,7 +109,6 @@ class ViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 

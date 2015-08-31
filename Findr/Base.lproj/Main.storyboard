@@ -16,19 +16,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85O-9Z-0WW">
-                                <rect key="frame" x="66" y="484" width="368" height="73"/>
-                                <state key="normal" title="Button" image="facebook_login">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Findr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Gl-Dh-406">
+                                <rect key="frame" x="147" y="86" width="120" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="fcw-BC-7ZB"/>
+                                    <constraint firstAttribute="height" constant="50" id="l4m-ho-HDe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="51"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85O-9Z-0WW">
+                                <rect key="frame" x="-101" y="294" width="634" height="148"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="634" id="zm9-l3-a0b"/>
+                                </constraints>
+                                <state key="normal" image="facebook_login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="signIn:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="d7W-la-k0l"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="85O-9Z-0WW" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="3uT-0p-nL2"/>
+                            <constraint firstItem="9Gl-Dh-406" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="66" id="J79-QX-8SA"/>
+                            <constraint firstItem="9Gl-Dh-406" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="KzF-TB-yYA"/>
+                            <constraint firstItem="85O-9Z-0WW" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="-101" id="ggJ-nC-L4t"/>
+                            <constraint firstItem="85O-9Z-0WW" firstAttribute="top" secondItem="9Gl-Dh-406" secondAttribute="bottom" constant="158" id="jjW-6N-19S"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--SignUpViewController-->
+        <scene sceneID="4ge-8r-2EI">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oUj-qe-vh1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController title="SignUpViewController" id="DED-q8-KLh" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1056" y="354"/>
         </scene>
     </scenes>
     <resources>
