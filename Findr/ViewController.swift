@@ -94,6 +94,16 @@ class ViewController: UIViewController {
             println("Chosen")
         }
 
+        if gesture.state == UIGestureRecognizerState.Ended {
+            
+            positiveSingle.center = CGPointMake(self.view.bounds.width / 2, self.view.bounds.height / 2)
+            
+            scale = max(abs(xFromCenter)/100, 1)
+            rotation = CGAffineTransformMakeRotation(0)
+            stretch = CGAffineTransformScale(rotation, scale, scale)
+            
+            positiveSingle.transform = stretch
+        }
     }
 
     override func didReceiveMemoryWarning() {
