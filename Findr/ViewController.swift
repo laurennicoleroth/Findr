@@ -30,7 +30,6 @@ class ViewController: UIViewController {
         
         positiveSingle.userInteractionEnabled = true
         
-        
     }
     
     
