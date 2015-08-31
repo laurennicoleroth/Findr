@@ -35,7 +35,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func facebookLogin() {
-        let permissions = ["public_profile"]
+        let permissions = ["public_profile", "email"]
         
         PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions as [AnyObject]) {
             (user: PFUser?, error: NSError?) -> Void in
