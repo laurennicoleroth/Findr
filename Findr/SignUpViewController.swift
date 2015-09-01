@@ -30,9 +30,17 @@ class SignUpViewController: UIViewController {
                 let userEmail = (facebookData.objectForKey("email") as? String)
                 let userPicture = (facebookData.objectForKey("picture") as? String)
                 let userId = (facebookData.objectForKey("id") as? NSString)
-                var facebookProfileUrl = "http://graph.facebook.com/\(userId!)/picture?type=large"
-                println(facebookProfileUrl)
-                                
+//                var facebookProfileUrl = "http://graph.facebook.com/\(userId!)/picture?type=large" as NSURL
+                var imgURLString = "http://graph.facebook.com/" + (userId! as String) + "/picture?type=large" //type=normal
+                var imgURL = NSURL(string: imgURLString)
+                var imageData = NSData(contentsOfURL: imgURL!)
+                var data = UIImage(data: imageData!)
+                if let url  = NSURL(string: imgURLString),
+                    data = NSData(contentsOfURL: url)
+                {
+                    self.profilePic.image = UIImage(data: data)
+                }
+                
                 let firstName = (facebookData.objectForKey("first_name") as? String)
                 let lastName = (facebookData.objectForKey("last_name") as? String)
             }
