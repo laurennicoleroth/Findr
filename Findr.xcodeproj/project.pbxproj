@@ -31,6 +31,8 @@
 		9674E9061B91068A00A281AA /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9674E8FF1B91068A00A281AA /* ParseUI.framework */; };
 		9674E90D1B910DAF00A281AA /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9674E90C1B910DAF00A281AA /* FBSDKCoreKit.framework */; };
 		9674E90F1B910E5D00A281AA /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9674E90E1B910E5D00A281AA /* FBSDKLoginKit.framework */; };
+		9674E9691B95291B00A281AA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9674E9681B95291B00A281AA /* SignUpViewController.swift */; };
+		9674E96B1B9530B500A281AA /* FindrCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9674E96A1B9530B500A281AA /* FindrCardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,8 @@
 		9674E90B1B910BD600A281AA /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		9674E90C1B910DAF00A281AA /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		9674E90E1B910E5D00A281AA /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		9674E9681B95291B00A281AA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		9674E96A1B9530B500A281AA /* FindrCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindrCardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +140,8 @@
 				9674E8DE1B90F3AB00A281AA /* Frameworks */,
 				9674E8B51B90EE3900A281AA /* AppDelegate.swift */,
 				9674E8B71B90EE3900A281AA /* ViewController.swift */,
+				9674E96A1B9530B500A281AA /* FindrCardViewController.swift */,
+				9674E9681B95291B00A281AA /* SignUpViewController.swift */,
 				9674E8B91B90EE3900A281AA /* Main.storyboard */,
 				9674E8BC1B90EE3900A281AA /* Images.xcassets */,
 				9674E8BE1B90EE3900A281AA /* LaunchScreen.xib */,
@@ -297,6 +303,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9674E96B1B9530B500A281AA /* FindrCardViewController.swift in Sources */,
+				9674E9691B95291B00A281AA /* SignUpViewController.swift in Sources */,
 				9674E8B81B90EE3900A281AA /* ViewController.swift in Sources */,
 				9674E8B61B90EE3900A281AA /* AppDelegate.swift in Sources */,
 			);

@@ -19,13 +19,6 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greenplus" translatesAutoresizingMaskIntoConstraints="NO" id="4vf-r7-VrT">
-                    <rect key="frame" x="152" y="221" width="163" height="172"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="172" id="vCG-n0-bUW"/>
-                        <constraint firstAttribute="width" constant="163" id="xJE-Z2-ZJV"/>
-                    </constraints>
-                </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Findr" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
                     <rect key="frame" x="13" y="149" width="441" height="43"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
@@ -34,21 +27,16 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="4vf-r7-VrT" firstAttribute="centerX" secondItem="kId-c2-rCX" secondAttribute="centerX" id="1Eu-3y-7l1"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="2pK-0Y-KBY"/>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="13" id="Niy-bt-pzT"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="gN9-ub-KWt"/>
-                <constraint firstItem="4vf-r7-VrT" firstAttribute="top" secondItem="kId-c2-rCX" secondAttribute="bottom" constant="29" id="oDY-AA-BYz"/>
                 <constraint firstAttribute="trailing" secondItem="kId-c2-rCX" secondAttribute="trailing" constant="26" id="oRC-GB-as7"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="top" secondItem="4vf-r7-VrT" secondAttribute="bottom" constant="46" id="uAB-p1-6Fm"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="wem-ie-O14"/>
+                <constraint firstItem="kId-c2-rCX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="149" id="y56-rr-9Xs"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="548" y="455"/>
         </view>
     </objects>
-    <resources>
-        <image name="greenplus" width="600" height="700"/>
-    </resources>
 </document>
