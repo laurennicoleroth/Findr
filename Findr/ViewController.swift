@@ -18,6 +18,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if PFUser.currentUser() != nil {
+            println("User is logged in")
+        } else {
+            println("User is not logged in")
+        }
     }
     
     func loadPositiveSingle() {
