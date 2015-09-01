@@ -13,6 +13,10 @@ import ParseFacebookUtilsV4
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var loginCancelledLabel: UILabel!
+    
+//    var fbloginView = FBLoginView(readPermissions: ["email", "public_profile"])
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

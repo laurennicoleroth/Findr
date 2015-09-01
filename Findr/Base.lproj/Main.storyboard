@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -19,18 +20,19 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Findr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Gl-Dh-406">
                                 <rect key="frame" x="147" y="86" width="120" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="fcw-BC-7ZB"/>
-                                    <constraint firstAttribute="height" constant="50" id="l4m-ho-HDe"/>
+                                    <constraint firstAttribute="height" constant="50" id="fc3-pe-IOh"/>
+                                    <constraint firstAttribute="width" constant="120" id="v7M-Tq-Ch2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="51"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85O-9Z-0WW">
-                                <rect key="frame" x="-101" y="294" width="634" height="148"/>
+                                <rect key="frame" x="14" y="500" width="387" height="90"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="634" id="zm9-l3-a0b"/>
+                                    <constraint firstAttribute="height" constant="90" id="NYd-Ap-gzX"/>
+                                    <constraint firstAttribute="width" constant="387" id="h3K-Ie-Ju5"/>
                                 </constraints>
-                                <state key="normal" image="facebook_login">
+                                <state key="normal" image="facebook-login-button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -38,17 +40,33 @@
                                     <segue destination="9S0-lq-0Nh" kind="show" id="Xe3-WM-Jx6"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login was unsuccessful, please try again." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7u-fq-lLf">
+                                <rect key="frame" x="57" y="229" width="331" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="kVi-78-qQk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.9803922176361084" green="0.17647059261798859" blue="0.11372549831867218" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="85O-9Z-0WW" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="3uT-0p-nL2"/>
-                            <constraint firstItem="9Gl-Dh-406" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="66" id="J79-QX-8SA"/>
-                            <constraint firstItem="9Gl-Dh-406" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="KzF-TB-yYA"/>
-                            <constraint firstItem="85O-9Z-0WW" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="-101" id="ggJ-nC-L4t"/>
-                            <constraint firstItem="85O-9Z-0WW" firstAttribute="top" secondItem="9Gl-Dh-406" secondAttribute="bottom" constant="158" id="jjW-6N-19S"/>
+                            <constraint firstAttribute="centerX" secondItem="85O-9Z-0WW" secondAttribute="centerX" constant="-0.5" id="593-ug-a4u"/>
+                            <constraint firstItem="85O-9Z-0WW" firstAttribute="centerX" secondItem="C7u-fq-lLf" secondAttribute="centerX" constant="-15" id="DOh-PA-WyB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="C7u-fq-lLf" secondAttribute="trailing" constant="10" id="DVz-Ik-xQM"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="85O-9Z-0WW" secondAttribute="bottom" constant="146" id="FXX-wH-dIO"/>
+                            <constraint firstItem="C7u-fq-lLf" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="41" id="Jyl-VZ-QCT"/>
+                            <constraint firstItem="9Gl-Dh-406" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="66" id="Ov2-vj-9sR"/>
+                            <constraint firstItem="C7u-fq-lLf" firstAttribute="top" secondItem="9Gl-Dh-406" secondAttribute="bottom" constant="93" id="UEE-cR-X2E"/>
+                            <constraint firstItem="9Gl-Dh-406" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="gf4-tC-QmB"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="85O-9Z-0WW" secondAttribute="bottom" constant="146" id="ohx-AK-Lop"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="loginCancelledLabel" destination="C7u-fq-lLf" id="hWC-z6-MCc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
@@ -73,6 +91,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="facebook_login" width="313" height="73"/>
+        <image name="facebook-login-button" width="582" height="140"/>
     </resources>
 </document>
