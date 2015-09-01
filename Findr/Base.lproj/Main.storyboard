@@ -17,33 +17,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Findr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNe-NB-0ze">
-                                <rect key="frame" x="263" y="28" width="75" height="56"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWH-WN-jit">
+                                <rect key="frame" x="0.0" y="386" width="600" height="116"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="8AR-5V-GQk"/>
-                                    <constraint firstAttribute="width" constant="75" id="wCn-AF-eFH"/>
+                                    <constraint firstAttribute="height" constant="116" id="JeD-sc-WyS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" image="facebook-login-button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signIn:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MaO-Hd-QDE"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Findr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNe-NB-0ze">
+                                <rect key="frame" x="241" y="102" width="115" height="74"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="115" id="3Yd-eF-P6v"/>
+                                    <constraint firstAttribute="height" constant="74" id="zim-Gw-PQ8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="46"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWH-WN-jit">
-                                <rect key="frame" x="34" y="336" width="531" height="194"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="194" id="IKg-cp-AJ0"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="facebook-login-button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="xWH-WN-jit" secondAttribute="bottom" constant="70" id="MTo-SR-jRQ"/>
-                            <constraint firstItem="yNe-NB-0ze" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="TOo-Gq-wiz"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="xWH-WN-jit" secondAttribute="trailing" constant="19" id="cyY-rM-ETo"/>
-                            <constraint firstItem="xWH-WN-jit" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="18" id="f28-n4-pBg"/>
-                            <constraint firstItem="yNe-NB-0ze" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" symbolic="YES" id="ue5-v3-GHy"/>
+                            <constraint firstItem="yNe-NB-0ze" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="82" id="FhP-84-wba"/>
+                            <constraint firstItem="yNe-NB-0ze" firstAttribute="centerX" secondItem="xWH-WN-jit" secondAttribute="centerX" constant="-1.5" id="MEn-Z2-V4J"/>
+                            <constraint firstItem="xWH-WN-jit" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="jh5-1i-q4J"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xWH-WN-jit" secondAttribute="trailing" constant="-16" id="p45-fj-2gq"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="xWH-WN-jit" secondAttribute="bottom" constant="98" id="tiC-Z4-IKe"/>
                         </constraints>
                     </view>
                 </viewController>

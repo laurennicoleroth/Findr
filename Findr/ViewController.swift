@@ -18,8 +18,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        facebookLogin()
-        
     }
     
     func loadPositiveSingle() {
@@ -34,8 +32,7 @@ class ViewController: UIViewController {
         positiveSingle.userInteractionEnabled = true
     }
     
-    
-    @IBAction func facebookLogin() {
+    @IBAction func signIn(sender: AnyObject) {
         let permissions = ["public_profile", "email"]
         
         PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions as [AnyObject]) {
@@ -50,7 +47,11 @@ class ViewController: UIViewController {
                 println("Uh oh. The user cancelled the Facebook login.")
             }
         }
+
     }
+    
+    @IBAction func facebookLogin() {
+            }
     
     func createProfile() {
         var user = PFUser()
