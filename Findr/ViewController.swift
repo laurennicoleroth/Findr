@@ -20,6 +20,9 @@ class ViewController: UIViewController {
         
         facebookLogin()
         
+    }
+    
+    func loadPositiveSingle() {
         var positiveSingle: UILabel = UILabel(frame: CGRectMake(self.view.bounds.width / 2 - 100, self.view.bounds.height / 2 - 50, 200, 100))
         positiveSingle.text = "Positive Single"
         positiveSingle.textAlignment = NSTextAlignment.Center
@@ -29,8 +32,6 @@ class ViewController: UIViewController {
         positiveSingle.addGestureRecognizer(gesture)
         
         positiveSingle.userInteractionEnabled = true
-        
-        
     }
     
     
