@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Parse
+import Bolts
+import ParseFacebookUtilsV4
 
 class SignUpViewController: UIViewController {
 
@@ -18,8 +21,23 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        var fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id"])
+        fbRequest.startWithCompletionHandler({ (FBSDKGraphRequestConnection, result, error) -> Void in
+            
+            if (error == nil && result != nil) {
+                let facebookData = result as! NSDictionary //FACEBOOK DATA IN DICTIONARY
+                let userEmail = (facebookData.objectForKey("email") as? String)
+                let userPicture = (facebookData.objectForKey("picture") as? String)
+                let userId = (facebookData.objectForKey("id") as? String)
+                println(userId)
+                let firstName = (facebookData.objectForKey("first_name") as? String)
+                let lastName = (facebookData.objectForKey("last_name") as? String)
+            }
+        })
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,6 +45,9 @@ class SignUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func signUp(sender: AnyObject) {
+        
+    }
 
     /*
     // MARK: - Navigation
