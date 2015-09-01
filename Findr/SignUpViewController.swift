@@ -29,15 +29,14 @@ class SignUpViewController: UIViewController {
                 let facebookData = result as! NSDictionary //FACEBOOK DATA IN DICTIONARY
                 let userEmail = (facebookData.objectForKey("email") as? String)
                 let userPicture = (facebookData.objectForKey("picture") as? String)
-                let userId = (facebookData.objectForKey("id") as? String)
-                println(userId)
+                let userId = (facebookData.objectForKey("id") as? NSString)
+                var facebookProfileUrl = "http://graph.facebook.com/\(userId!)/picture?type=large"
+                println(facebookProfileUrl)
+                                
                 let firstName = (facebookData.objectForKey("first_name") as? String)
                 let lastName = (facebookData.objectForKey("last_name") as? String)
             }
         })
-        
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
