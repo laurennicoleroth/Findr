@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,20 +17,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Findr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNe-NB-0ze">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Findr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNe-NB-0ze">
                                 <rect key="frame" x="263" y="28" width="75" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="8AR-5V-GQk"/>
+                                    <constraint firstAttribute="width" constant="75" id="wCn-AF-eFH"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWH-WN-jit">
-                                <rect key="frame" x="34" y="401" width="531" height="129"/>
-                                <state key="normal" backgroundImage="851580_650602211663185_74135741_n-667x122">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWH-WN-jit">
+                                <rect key="frame" x="34" y="336" width="531" height="194"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="194" id="IKg-cp-AJ0"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="facebook-login-button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="xWH-WN-jit" secondAttribute="bottom" constant="70" id="MTo-SR-jRQ"/>
+                            <constraint firstItem="yNe-NB-0ze" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="TOo-Gq-wiz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xWH-WN-jit" secondAttribute="trailing" constant="19" id="cyY-rM-ETo"/>
+                            <constraint firstItem="xWH-WN-jit" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="18" id="f28-n4-pBg"/>
+                            <constraint firstItem="yNe-NB-0ze" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" symbolic="YES" id="ue5-v3-GHy"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -37,6 +52,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="851580_650602211663185_74135741_n-667x122" width="313" height="73"/>
+        <image name="facebook-login-button" width="582" height="140"/>
     </resources>
 </document>
