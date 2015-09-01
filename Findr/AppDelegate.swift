@@ -41,7 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application( application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError ) {
         //You will get this message unless running on a registered device
         println("Fail!")
-        
     }
 
 

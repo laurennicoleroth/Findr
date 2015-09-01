@@ -25,14 +25,19 @@ class ViewController: UIViewController {
         push.setChannel("Match")
         push.setMessage("You and someone else just matched!")
         push.sendPushInBackground()
+        
+        self.loginCancelledLabel.alpha = 0
 
     }
     
     @IBAction func signIn(sender: AnyObject) {
-        let permissions = ["public_profile", "email"]
+        let permissions = ["public_profile"]
+        
+        self.loginCancelledLabel.alpha = 0
         
         PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions) {
             (user: PFUser?, error: NSError?) -> Void in
+            println(user == nil)
             if let user = user {
                 if user.isNew {
                     println("User signed up and logged in through Facebook!")
@@ -41,8 +46,10 @@ class ViewController: UIViewController {
                 }
             } else {
                 println("Uh oh. The user cancelled the Facebook login.")
+                self.loginCancelledLabel.alpha = 1.0
             }
         }
+        
     }
     
     

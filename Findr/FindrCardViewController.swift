@@ -18,7 +18,7 @@ class FindrCardViewController: UIViewController {
     
     func loadSingles() {
         var positiveSingle: UILabel = UILabel(frame: CGRectMake(self.view.bounds.width / 2 - 100, self.view.bounds.height / 2 - 50, 200, 100))
-        positiveSingle.text = "Positive Single"
+//        positiveSingle.text = "Positive Single"
         positiveSingle.textAlignment = NSTextAlignment.Center
         self.view.addSubview(positiveSingle)
         
