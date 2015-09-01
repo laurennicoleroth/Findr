@@ -87,16 +87,16 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="loginCancelledLabel" destination="MLH-kV-qDH" id="Bcg-1I-bHo"/>
-                        <segue destination="Izi-pq-4P1" kind="show" identifier="signUp" id="arc-WG-LQW"/>
+                        <segue destination="Izi-pq-4P1" kind="show" id="gXK-NJ-Jfb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="1ih-BP-gYV">
             <objects>
-                <viewController id="Izi-pq-4P1" sceneMemberID="viewController">
+                <viewController id="Izi-pq-4P1" customClass="SignUpViewController" customModule="Findr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SgE-f3-ikk"/>
                         <viewControllerLayoutGuide type="bottom" id="yOB-mR-EBi"/>
@@ -145,6 +145,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="genderSwitch" destination="GVP-tZ-qA4" id="S8Y-km-X8a"/>
+                        <outlet property="profilePic" destination="wVW-Jy-Dc7" id="F2y-mT-YfT"/>
+                        <outlet property="signUp" destination="wkd-Zv-SZk" id="V1d-qa-2Ht"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OfE-cC-bzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
