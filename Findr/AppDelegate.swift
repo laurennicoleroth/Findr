@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import Bolts
+import FBSDKCoreKit
 import ParseFacebookUtilsV4
 
 @UIApplicationMain
@@ -21,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Parse
         Parse.enableLocalDatastore()
         Parse.setApplicationId("3Zvf6r8ZMEmNjyJGdK521qvO1fXWO15PBYwlxqVD", clientKey: "dLiyihlVLxzx0JSNNWBaayiIjDXcv2KTiUQ5zMBo")
+        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
         //Facebook
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
@@ -30,7 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(pushSettings)
         application.registerForRemoteNotifications()
 
-        return true
+//        return true
+        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
     func application( application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData ) {
@@ -73,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(application: UIApplication) {
-
+        
     }
 
 

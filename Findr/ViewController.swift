@@ -21,23 +21,26 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         //Setup Push Notifications
-        let push = PFPush()
-        push.setChannel("Match")
-        push.setMessage("You and someone else just matched!")
-        push.sendPushInBackground()
-        
-        self.loginCancelledLabel.alpha = 0
+//        let push = PFPush()
+//        push.setChannel("Match")
+//        push.setMessage("You and someone else just matched!")
+//        push.sendPushInBackground()
+//        
+//        self.loginCancelledLabel.alpha = 0
 
     }
     
     @IBAction func signIn(sender: AnyObject) {
-        let permissions = ["public_profile"]
         
+        let permissions = [ "email", "public_profile"]
+
         self.loginCancelledLabel.alpha = 0
+        
+        var user1 = PFUser.currentUser()
+        println(user1)
         
         PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions) {
             (user: PFUser?, error: NSError?) -> Void in
-            println(user == nil)
             if let user = user {
                 if user.isNew {
                     println("User signed up and logged in through Facebook!")
