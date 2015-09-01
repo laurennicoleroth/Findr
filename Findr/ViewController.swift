@@ -13,6 +13,7 @@ import ParseFacebookUtilsV4
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var loginCancelledLabel: UILabel!
     var xFromCenter:CGFloat = 0
 
     override func viewDidLoad() {
@@ -39,17 +40,22 @@ class ViewController: UIViewController {
     
     @IBAction func signIn(sender: AnyObject) {
         let permissions = ["public_profile", "email"]
+        self.loginCancelledLabel.alpha = 0.0
         
         PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions as [AnyObject]) {
             (user: PFUser?, error: NSError?) -> Void in
             if let user = user {
                 if user.isNew {
                     println("User signed up and logged in through Facebook!")
+                    
+                    
+                    
                 } else {
                     println("User logged in through Facebook!")
                 }
             } else {
                 println("Uh oh. The user cancelled the Facebook login.")
+                self.loginCancelledLabel.alpha = 1.0
             }
         }
 
