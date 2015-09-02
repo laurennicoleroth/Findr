@@ -17,17 +17,24 @@ class SignUpViewController: UIViewController {
     @IBOutlet var genderSwitch: UISwitch!
     @IBOutlet var profilePic: UIImageView!
     @IBOutlet var signUp: UIButton!
+    @IBOutlet var userNameLabel: UILabel!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id"])
+        var fbRequest = FBSDKGraphRequest(graphPath: "me", parameters:
+            ["fields": "id, email, gender, picture, first_name, last_name"])
         fbRequest.startWithCompletionHandler({ (FBSDKGraphRequestConnection, result, error) -> Void in
             
             if (error == nil && result != nil) {
                 let facebookData = result as! NSDictionary //FACEBOOK DATA IN DICTIONARY
                 let userEmail = (facebookData.objectForKey("email") as? String)
+                let userGender = (facebookData.objectForKey("gender") as? String)
+                let userFirstName = (facebookData.objectForKey("first_name") as? String)
+                let userLastName = (facebookData.objectForKey("last_name") as? String)
+                println(userFirstName)
+                println(userLastName)
                 let userPicture = (facebookData.objectForKey("picture") as? String)
                 let userId = (facebookData.objectForKey("id") as? NSString)
                 
@@ -47,13 +54,14 @@ class SignUpViewController: UIViewController {
                         profile["userId"] = userId
                         profile["imageName"] = "Profile Picture from Facebook"
                         profile["imageFile"] = imageFile
-                        profile.saveInBackground()
+                        profile.save()
                     } else {
                         // Show the signup or login screen
                     }
                 
                 }
             }
+  
         })
     }
 
