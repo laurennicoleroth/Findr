@@ -29,14 +29,12 @@ class SignUpViewController: UIViewController {
     
     func getUserProfile() {
         var query = PFQuery(className:"Profile")
-        let username = PFUser.currentUser()!.username
+        let username = String(stringInterpolationSegment: PFUser.currentUser()!.username!)
         println(username)
-        query.whereKey("createdBy", equalTo: "vA9mpE3PRcXbEBR63AKFvMKXK")
+        query.whereKey("createdBy", equalTo: username)
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
-            
             if error == nil {
-                
                 if let objects = objects as? [PFObject] {
                     for object in objects {
                         if let userPicture = object["image"] as? PFFile {
