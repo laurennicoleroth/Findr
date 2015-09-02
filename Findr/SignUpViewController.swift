@@ -37,6 +37,7 @@ class SignUpViewController: UIViewController {
             if error == nil {
                 if let objects = objects as? [PFObject] {
                     for object in objects {
+                        self.userNameLabel.text = object["fullName"] as? String
                         if let userPicture = object["image"] as? PFFile {
                             userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
                                 if (error == nil) {
