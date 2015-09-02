@@ -18,27 +18,60 @@ class SignUpViewController: UIViewController {
     @IBOutlet var profilePic: UIImageView!
     @IBOutlet var signUp: UIButton!
     @IBOutlet var userNameLabel: UILabel!
+    @IBOutlet var aboutText: UITextView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       getUserProfile()
+    }
+    
+    func getUserProfile() {
+        var query = PFQuery(className:"Profile")
+        let username = PFUser.currentUser()!.username
+        println(username)
+        query.whereKey("createdBy", equalTo: "vA9mpE3PRcXbEBR63AKFvMKXK")
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]?, error: NSError?) -> Void in
+            
+            if error == nil {
+                
+                if let objects = objects as? [PFObject] {
+                    for object in objects {
+                        if let userPicture = object["image"] as? PFFile {
+                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                                if (error == nil) {
+                                    self.profilePic.image = UIImage(data:imageData!)
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            } else {
+                // Log details of the failure
+                println("Error: \(error!) \(error!.userInfo!)")
+            }
+        }
+    }
+    
+    func facebookGraphRequest() {
         var fbRequest = FBSDKGraphRequest(graphPath: "me", parameters:
-            ["fields": "id, email, gender, picture, first_name, last_name"])
+            ["fields": "id, email, gender, picture, first_name, last_name, bio"])
         fbRequest.startWithCompletionHandler({ (FBSDKGraphRequestConnection, result, error) -> Void in
             
             if (error == nil && result != nil) {
                 let facebookData = result as! NSDictionary //FACEBOOK DATA IN DICTIONARY
-                let userEmail = (facebookData.objectForKey("email") as? String)
-                let userGender = (facebookData.objectForKey("gender") as? String)
-                let userFirstName = (facebookData.objectForKey("first_name") as? String)
-                let userLastName = (facebookData.objectForKey("last_name") as? String)
-                println(userFirstName)
-                println(userLastName)
-                let userPicture = (facebookData.objectForKey("picture") as? String)
-                let userId = (facebookData.objectForKey("id") as? NSString)
+                let userEmail = (facebookData.objectForKey("email") as! String)
+                let userGender = (facebookData.objectForKey("gender") as! String)
+                let userFirstName = (facebookData.objectForKey("first_name") as! String)
+                let userLastName = (facebookData.objectForKey("last_name") as! String)
+                self.userNameLabel.text = userFirstName + " " + userLastName
+                //                let userPicture = (facebookData.objectForKey("picture"))
+                let userId = (facebookData.objectForKey("id") as! String)
                 
-                var imgURLString = "http://graph.facebook.com/" + (userId! as String) + "/picture?type=large"
+                var imgURLString = "http://graph.facebook.com/" + (userId as String) + "/picture?type=large"
                 var imgURL = NSURL(string: imgURLString)
                 var imageData = NSData(contentsOfURL: imgURL!)
                 if let url  = NSURL(string: imgURLString),
@@ -51,20 +84,31 @@ class SignUpViewController: UIViewController {
                         let imageFile = PFFile(name:"profile.png", data:imageData)
                         
                         var profile = PFObject(className:"Profile")
-                        profile["userId"] = userId
-                        profile["imageName"] = "Profile Picture from Facebook"
-                        profile["imageFile"] = imageFile
-                        profile.save()
+                        profile["createdBy"] = currentUser?.username
+                        profile["fullName"] = userFirstName + " " + userLastName
+                        profile["gender"] = userGender
+                        profile["image"] = imageFile
+                        profile.saveInBackgroundWithBlock {
+                            (success: Bool, error: NSError?) -> Void in
+                            if (success) {
+                                println("Profile has been saved")
+                            } else {
+                                println("There was a problem, check error.description")
+                                println(error!.description)
+                            }
+                        }
+                        
                     } else {
                         // Show the signup or login screen
                     }
-                
+                    
                 }
             }
-  
+            
         })
-    }
 
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
