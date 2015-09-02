@@ -22,15 +22,14 @@ class SignUpViewController: UIViewController {
     
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
+       super.viewDidLoad()
+
        getUserProfile()
     }
     
     func getUserProfile() {
         var query = PFQuery(className:"Profile")
         let username = String(stringInterpolationSegment: PFUser.currentUser()!.username!)
-        println(username)
         query.whereKey("createdBy", equalTo: username)
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in
@@ -51,6 +50,7 @@ class SignUpViewController: UIViewController {
             } else {
                 // Log details of the failure
                 println("Error: \(error!) \(error!.userInfo!)")
+                self.facebookGraphRequest()
             }
         }
     }
@@ -83,6 +83,7 @@ class SignUpViewController: UIViewController {
                         let imageFile = PFFile(name:"profile.png", data:imageData)
                         
                         var profile = PFObject(className:"Profile")
+                        
                         profile["createdBy"] = currentUser?.username
                         profile["fullName"] = userFirstName + " " + userLastName
                         profile["gender"] = userGender
@@ -108,13 +109,42 @@ class SignUpViewController: UIViewController {
 
     }
     
+    func createProfile() {
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     @IBAction func signUp(sender: AnyObject) {
+        var profile = PFObject(className:"Profile")
+        facebookGraphRequest()
         
+        if genderSwitch.on {
+            profile["preference"] = "women"
+            profile.saveInBackgroundWithBlock {
+                (success: Bool, error: NSError?) -> Void in
+                if (success) {
+                    println("Profile pref for women has been saved")
+                } else {
+                    println("There was a problem, check error.description")
+                    println(error!.description)
+                }
+            }
+        } else {
+            profile["preference"] = "men"
+            profile.saveInBackgroundWithBlock {
+                (success: Bool, error: NSError?) -> Void in
+                if (success) {
+                    println("Profile pref for men has been saved")
+                } else {
+                    println("There was a problem, check error.description")
+                    println(error!.description)
+                }
+            }
+        }
     }
 
     /*
