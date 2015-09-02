@@ -30,19 +30,29 @@ class SignUpViewController: UIViewController {
                 let userEmail = (facebookData.objectForKey("email") as? String)
                 let userPicture = (facebookData.objectForKey("picture") as? String)
                 let userId = (facebookData.objectForKey("id") as? NSString)
-//                var facebookProfileUrl = "http://graph.facebook.com/\(userId!)/picture?type=large" as NSURL
-                var imgURLString = "http://graph.facebook.com/" + (userId! as String) + "/picture?type=large" //type=normal
+                
+                var imgURLString = "http://graph.facebook.com/" + (userId! as String) + "/picture?type=large"
                 var imgURL = NSURL(string: imgURLString)
                 var imageData = NSData(contentsOfURL: imgURL!)
-                var data = UIImage(data: imageData!)
                 if let url  = NSURL(string: imgURLString),
-                    data = NSData(contentsOfURL: url)
+                    image = NSData(contentsOfURL: url)
                 {
-                    self.profilePic.image = UIImage(data: data)
-                }
+                    self.profilePic.image = UIImage(data: image)
+                    var currentUser = PFUser.currentUser()
+                    if currentUser != nil {
+                        let imageData = UIImagePNGRepresentation(self.profilePic.image)
+                        let imageFile = PFFile(name:"profile.png", data:imageData)
+                        
+                        var profile = PFObject(className:"Profile")
+                        profile["userId"] = userId
+                        profile["imageName"] = "Profile Picture from Facebook"
+                        profile["imageFile"] = imageFile
+                        profile.saveInBackground()
+                    } else {
+                        // Show the signup or login screen
+                    }
                 
-                let firstName = (facebookData.objectForKey("first_name") as? String)
-                let lastName = (facebookData.objectForKey("last_name") as? String)
+                }
             }
         })
     }
