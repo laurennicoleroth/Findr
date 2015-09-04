@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		963C31A11B9A06D600231309 /* FindrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963C31A01B9A06D600231309 /* FindrViewController.swift */; };
 		9674E8B61B90EE3900A281AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9674E8B51B90EE3900A281AA /* AppDelegate.swift */; };
 		9674E8B81B90EE3900A281AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9674E8B71B90EE3900A281AA /* ViewController.swift */; };
 		9674E8BB1B90EE3900A281AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9674E8B91B90EE3900A281AA /* Main.storyboard */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		963C31A01B9A06D600231309 /* FindrViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindrViewController.swift; sourceTree = "<group>"; };
 		9674E8B01B90EE3900A281AA /* Findr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Findr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9674E8B41B90EE3900A281AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9674E8B51B90EE3900A281AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				9674E8B71B90EE3900A281AA /* ViewController.swift */,
 				9674E96C1B9629AE00A281AA /* SignUpViewController.swift */,
 				9674E8B91B90EE3900A281AA /* Main.storyboard */,
+				963C31A01B9A06D600231309 /* FindrViewController.swift */,
 				9674E8BC1B90EE3900A281AA /* Images.xcassets */,
 				9674E8BE1B90EE3900A281AA /* LaunchScreen.xib */,
 				9674E8DE1B90F3AB00A281AA /* Frameworks */,
@@ -302,6 +305,7 @@
 			files = (
 				9674E96D1B9629AE00A281AA /* SignUpViewController.swift in Sources */,
 				9674E8B81B90EE3900A281AA /* ViewController.swift in Sources */,
+				963C31A11B9A06D600231309 /* FindrViewController.swift in Sources */,
 				9674E8B61B90EE3900A281AA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
