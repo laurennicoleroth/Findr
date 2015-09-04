@@ -23,38 +23,6 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
        super.viewDidLoad()
-
-      facebookGraphRequest()
-        
-//       getUserProfile()
-    }
-    
-    func getUserProfile() {
-        var query = PFQuery(className:"Profile")
-        let username = String(stringInterpolationSegment: PFUser.currentUser()!.username!)
-        query.whereKey("createdBy", equalTo: username)
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]?, error: NSError?) -> Void in
-            if error == nil {
-                if let objects = objects as? [PFObject] {
-                    for object in objects {
-                        self.userNameLabel.text = object["fullName"] as? String
-                        if let userPicture = object["image"] as? PFFile {
-                            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
-                                if (error == nil) {
-                                    self.profilePic.image = UIImage(data:imageData!)
-                                }
-                            }
-                        }
-                    }
-                }
-                
-            } else {
-                // Log details of the failure
-                println("Error: \(error!) \(error!.userInfo!)")
-                self.facebookGraphRequest()
-            }
-        }
     }
     
     func facebookGraphRequest() {
@@ -68,8 +36,6 @@ class SignUpViewController: UIViewController {
                 let userGender = (facebookData.objectForKey("gender") as! String)
                 let userFirstName = (facebookData.objectForKey("first_name") as! String)
                 let userLastName = (facebookData.objectForKey("last_name") as! String)
-                self.userNameLabel.text = userFirstName + " " + userLastName
-                //                let userPicture = (facebookData.objectForKey("picture"))
                 let userId = (facebookData.objectForKey("id") as! String)
                 
                 var imgURLString = "http://graph.facebook.com/" + (userId as String) + "/picture?type=large"
@@ -79,12 +45,14 @@ class SignUpViewController: UIViewController {
                     image = NSData(contentsOfURL: url)
                 {
                     self.profilePic.image = UIImage(data: image)
-                    var currentUser = PFUser.currentUser() as! PFUser!
+                    var currentUser = PFUser.currentUser() as PFUser!
                     if currentUser != nil {
                         let imageData = UIImagePNGRepresentation(self.profilePic.image)
                         let imageFile = PFFile(name:"profile.png", data:imageData)
-                        
+
                         currentUser["fullname"] = userFirstName + " " + userLastName
+                        currentUser["gender"] = userGender
+                        currentUser["email"] = userEmail
                         currentUser.saveInBackground()
                         
                     } else {
@@ -98,41 +66,20 @@ class SignUpViewController: UIViewController {
 
     }
     
-    func createProfile() {
-        
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     @IBAction func signUp(sender: AnyObject) {
-        var profile = PFObject(className:"Profile")
         facebookGraphRequest()
+        var currentUser = PFUser.currentUser() as PFUser!
         
         if genderSwitch.on {
-            profile["preference"] = "women"
-            profile.saveInBackgroundWithBlock {
-                (success: Bool, error: NSError?) -> Void in
-                if (success) {
-                    println("Profile pref for women has been saved")
-                } else {
-                    println("There was a problem, check error.description")
-                    println(error!.description)
-                }
-            }
+            currentUser["preference"] = "women"
+
         } else {
-            profile["preference"] = "men"
-            profile.saveInBackgroundWithBlock {
-                (success: Bool, error: NSError?) -> Void in
-                if (success) {
-                    println("Profile pref for men has been saved")
-                } else {
-                    println("There was a problem, check error.description")
-                    println(error!.description)
-                }
-            }
+            currentUser["preference"] = "men"
         }
     }
 
