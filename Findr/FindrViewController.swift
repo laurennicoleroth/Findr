@@ -12,8 +12,20 @@ class FindrViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        println(PFUser.currentUser())
 
-        // Do any additional setup after loading the view.
+        PFGeoPoint.geoPointForCurrentLocationInBackground {
+            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+            if error == nil {
+                println(geoPoint)
+                if let location = PFUser.currentUser()?["location"] as? PFGeoPoint {
+                    println(location)
+                }
+            } else {
+                println("something went wrong")
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
