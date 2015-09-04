@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		963C31A11B9A06D600231309 /* FindrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963C31A01B9A06D600231309 /* FindrViewController.swift */; };
+		963C31AB1B9A1D8600231309 /* CustomProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963C31A81B9A1D8600231309 /* CustomProfile.swift */; };
+		963C31AC1B9A1D8600231309 /* CustomUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963C31A91B9A1D8600231309 /* CustomUser.swift */; };
+		963C31AD1B9A1D8600231309 /* Parse+Subclasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963C31AA1B9A1D8600231309 /* Parse+Subclasses.swift */; };
 		9674E8B61B90EE3900A281AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9674E8B51B90EE3900A281AA /* AppDelegate.swift */; };
 		9674E8B81B90EE3900A281AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9674E8B71B90EE3900A281AA /* ViewController.swift */; };
 		9674E8BB1B90EE3900A281AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9674E8B91B90EE3900A281AA /* Main.storyboard */; };
@@ -47,6 +50,9 @@
 
 /* Begin PBXFileReference section */
 		963C31A01B9A06D600231309 /* FindrViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindrViewController.swift; sourceTree = "<group>"; };
+		963C31A81B9A1D8600231309 /* CustomProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomProfile.swift; path = ../../../Parse/GSParseSchema/Swift/CustomProfile.swift; sourceTree = "<group>"; };
+		963C31A91B9A1D8600231309 /* CustomUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomUser.swift; path = ../../../Parse/GSParseSchema/Swift/CustomUser.swift; sourceTree = "<group>"; };
+		963C31AA1B9A1D8600231309 /* Parse+Subclasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Parse+Subclasses.swift"; path = "../../../Parse/GSParseSchema/Swift/Parse+Subclasses.swift"; sourceTree = "<group>"; };
 		9674E8B01B90EE3900A281AA /* Findr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Findr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9674E8B41B90EE3900A281AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9674E8B51B90EE3900A281AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +148,9 @@
 				9674E96C1B9629AE00A281AA /* SignUpViewController.swift */,
 				9674E8B91B90EE3900A281AA /* Main.storyboard */,
 				963C31A01B9A06D600231309 /* FindrViewController.swift */,
+				963C31A81B9A1D8600231309 /* CustomProfile.swift */,
+				963C31A91B9A1D8600231309 /* CustomUser.swift */,
+				963C31AA1B9A1D8600231309 /* Parse+Subclasses.swift */,
 				9674E8BC1B90EE3900A281AA /* Images.xcassets */,
 				9674E8BE1B90EE3900A281AA /* LaunchScreen.xib */,
 				9674E8DE1B90F3AB00A281AA /* Frameworks */,
@@ -304,8 +313,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9674E96D1B9629AE00A281AA /* SignUpViewController.swift in Sources */,
+				963C31AD1B9A1D8600231309 /* Parse+Subclasses.swift in Sources */,
 				9674E8B81B90EE3900A281AA /* ViewController.swift in Sources */,
 				963C31A11B9A06D600231309 /* FindrViewController.swift in Sources */,
+				963C31AC1B9A1D8600231309 /* CustomUser.swift in Sources */,
+				963C31AB1B9A1D8600231309 /* CustomProfile.swift in Sources */,
 				9674E8B61B90EE3900A281AA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
