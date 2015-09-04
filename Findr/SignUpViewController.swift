@@ -24,7 +24,9 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
        super.viewDidLoad()
 
-       getUserProfile()
+      facebookGraphRequest()
+        
+//       getUserProfile()
     }
     
     func getUserProfile() {
@@ -77,26 +79,13 @@ class SignUpViewController: UIViewController {
                     image = NSData(contentsOfURL: url)
                 {
                     self.profilePic.image = UIImage(data: image)
-                    var currentUser = PFUser.currentUser()
+                    var currentUser = PFUser.currentUser() as! PFUser!
                     if currentUser != nil {
                         let imageData = UIImagePNGRepresentation(self.profilePic.image)
                         let imageFile = PFFile(name:"profile.png", data:imageData)
                         
-                        var profile = PFObject(className:"Profile")
-                        
-                        profile["createdBy"] = currentUser?.username
-                        profile["fullName"] = userFirstName + " " + userLastName
-                        profile["gender"] = userGender
-                        profile["image"] = imageFile
-                        profile.saveInBackgroundWithBlock {
-                            (success: Bool, error: NSError?) -> Void in
-                            if (success) {
-                                println("Profile has been saved")
-                            } else {
-                                println("There was a problem, check error.description")
-                                println(error!.description)
-                            }
-                        }
+                        currentUser["fullname"] = userFirstName + " " + userLastName
+                        currentUser.saveInBackground()
                         
                     } else {
                         // Show the signup or login screen
