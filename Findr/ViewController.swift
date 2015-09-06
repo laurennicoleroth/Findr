@@ -15,38 +15,36 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var loginCancelledLabel: UILabel!
     
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if PFUser.currentUser() != nil {
-            println("User is logged in")
-        } else {
-            println("User is not logged in")
-        }
-    }
-    
-    
     @IBAction func signIn(sender: AnyObject) {
         let permissions = ["public_profile", "email"]
         self.loginCancelledLabel.alpha = 0.0
         
-        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions as [AnyObject]) {
-            (user: PFUser?, error: NSError?) -> Void in
-            if let user = user {
-                if user.isNew {
-                    println("User signed up and logged in through Facebook!")
-                    
-                    self.performSegueWithIdentifier("signUp", sender: self)
-                    
+        if PFUser.currentUser() != nil {
+            self.performSegueWithIdentifier("signUp", sender: self)
+        } else {
+            PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions as [AnyObject]) {
+                (user: PFUser?, error: NSError?) -> Void in
+                if let user = user {
+                    if user.isNew {
+                        println("User signed up and logged in through Facebook!")
+                        
+                        self.performSegueWithIdentifier("signUp", sender: self)
+                        
+                    } else {
+                        println("User logged in through Facebook!")
+                        self.performSegueWithIdentifier("signUp", sender: self)
+                    }
                 } else {
-                    println("User logged in through Facebook!")
+                    println("Uh oh. The user cancelled the Facebook login.")
+                    self.loginCancelledLabel.alpha = 1.0
                 }
-            } else {
-                println("Uh oh. The user cancelled the Facebook login.")
-                self.loginCancelledLabel.alpha = 1.0
             }
         }
+        
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
     }
     

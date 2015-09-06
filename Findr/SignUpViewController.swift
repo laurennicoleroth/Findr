@@ -18,11 +18,30 @@ class SignUpViewController: UIViewController {
     @IBOutlet var profilePic: UIImageView!
     @IBOutlet var signUp: UIButton!
     @IBOutlet var userNameLabel: UILabel!
-    @IBOutlet var aboutText: UITextView!
-    
     
     override func viewDidLoad() {
        super.viewDidLoad()
+    }
+    
+
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func signUp(sender: AnyObject) {
+        
+        var currentUser = PFUser.currentUser() as PFUser!
+        
+        if genderSwitch.on {
+            currentUser["preference"] = "women"
+
+        } else {
+            currentUser["preference"] = "men"
+        }
+        
+        facebookGraphRequest()
     }
     
     func facebookGraphRequest() {
@@ -49,7 +68,7 @@ class SignUpViewController: UIViewController {
                     if currentUser != nil {
                         let imageData = UIImagePNGRepresentation(self.profilePic.image)
                         let imageFile = PFFile(name:"profile.png", data:imageData)
-
+                        
                         currentUser["fullname"] = userFirstName + " " + userLastName
                         currentUser["gender"] = userGender
                         currentUser["email"] = userEmail
@@ -63,24 +82,7 @@ class SignUpViewController: UIViewController {
             }
             
         })
-
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func signUp(sender: AnyObject) {
-        facebookGraphRequest()
-        var currentUser = PFUser.currentUser() as PFUser!
         
-        if genderSwitch.on {
-            currentUser["preference"] = "women"
-
-        } else {
-            currentUser["preference"] = "men"
-        }
     }
 
     /*
