@@ -25,6 +25,7 @@ class FindrViewController: UIViewController {
                     println(location)
                 }
             } else {
+                println(error)
                 println("something went wrong")
             }
         }
