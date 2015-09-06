@@ -44,7 +44,22 @@ class SignUpViewController: UIViewController {
         facebookGraphRequest()
     }
     
+    
+//    var imgURL: NSURL = NSURL(string: "https://pbs.twimg.com/media/CLmRStwWwAALDQU.jpg")!
+//    let request: NSURLRequest = NSURLRequest(URL: imgURL)
+//    NSURLConnection.sendAsynchronousRequest(
+//    request, queue: NSOperationQueue.mainQueue(),
+//    completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+//    if error == nil {
+//    var image = UIImage(data: data)
+//    var file = PFFile(data: UIImageJPEGRepresentation(image, 1.0))
+//    newUser["picture"] = file
+
+//    }
+    
+    
     func facebookGraphRequest() {
+        let currentUser = PFUser.currentUser() as PFUser!
         var fbRequest = FBSDKGraphRequest(graphPath: "me", parameters:
             ["fields": "id, email, gender, picture, first_name, last_name, bio"])
         fbRequest.startWithCompletionHandler({ (FBSDKGraphRequestConnection, result, error) -> Void in
@@ -58,27 +73,24 @@ class SignUpViewController: UIViewController {
                 let userId = (facebookData.objectForKey("id") as! String)
                 
                 var imgURLString = "http://graph.facebook.com/" + (userId as String) + "/picture?type=large"
-                var imgURL = NSURL(string: imgURLString)
-                var imageData = NSData(contentsOfURL: imgURL!)
-                if let url  = NSURL(string: imgURLString),
-                    image = NSData(contentsOfURL: url)
-                {
-                    self.profilePic.image = UIImage(data: image)
-                    var currentUser = PFUser.currentUser() as PFUser!
-                    if currentUser != nil {
-                        let imageData = UIImagePNGRepresentation(self.profilePic.image)
-                        let imageFile = PFFile(name:"profile.png", data:imageData)
-                        
-                        currentUser["fullname"] = userFirstName + " " + userLastName
-                        currentUser["gender"] = userGender
-                        currentUser["email"] = userEmail
-                        currentUser.saveInBackground()
-                        
-                    } else {
-                        // Show the signup or login screen
-                    }
-                    
-                }
+                var imgURL: NSURL = NSURL(string: imgURLString)!
+                let request: NSURLRequest = NSURLRequest(URL: imgURL)
+                NSURLConnection.sendAsynchronousRequest(
+                    request, queue: NSOperationQueue.mainQueue(),
+                    completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+                        if error == nil {
+                            var image = UIImage(data: data)
+                            var file = PFFile(data: UIImageJPEGRepresentation(image, 1.0))
+                            println(file)
+                            currentUser["picture"] = file
+                            currentUser["fullname"] = userFirstName + " " + userLastName
+                            currentUser["gender"] = userGender
+                            currentUser["email"] = userEmail
+                            currentUser.saveInBackground()
+                        }
+                })
+            } else {
+                println("something went wrong in the request")
             }
             
         })

@@ -19,25 +19,22 @@ class ViewController: UIViewController {
         let permissions = ["public_profile", "email"]
         self.loginCancelledLabel.alpha = 0.0
         
-        if PFUser.currentUser() != nil {
-            self.performSegueWithIdentifier("signUp", sender: self)
-        } else {
-            PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions as [AnyObject]) {
-                (user: PFUser?, error: NSError?) -> Void in
-                if let user = user {
-                    if user.isNew {
-                        println("User signed up and logged in through Facebook!")
-                        
-                        self.performSegueWithIdentifier("signUp", sender: self)
-                        
-                    } else {
-                        println("User logged in through Facebook!")
-                        self.performSegueWithIdentifier("signUp", sender: self)
-                    }
+
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions as [AnyObject]) {
+            (user: PFUser?, error: NSError?) -> Void in
+            if let user = user {
+                if user.isNew {
+                    println("User signed up and logged in through Facebook!")
+                    
+                    self.performSegueWithIdentifier("signUp", sender: self)
+                    
                 } else {
-                    println("Uh oh. The user cancelled the Facebook login.")
-                    self.loginCancelledLabel.alpha = 1.0
+                    println("User logged in through Facebook!")
+                    self.performSegueWithIdentifier("signUp", sender: self)
                 }
+            } else {
+                println("Uh oh. The user cancelled the Facebook login.")
+                self.loginCancelledLabel.alpha = 1.0
             }
         }
         

@@ -11,25 +11,54 @@ import UIKit
 class FindrViewController: UIViewController {
     
     var xFromCenter:CGFloat = 0
+    var i = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        println(PFUser.currentUser())
 
         PFGeoPoint.geoPointForCurrentLocationInBackground {
             (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
             if error == nil {
-                println(geoPoint)
-                if let location = PFUser.currentUser()?["location"] as? PFGeoPoint {
-                    println(location)
-                }
+                var user = PFUser.currentUser() as PFUser!
+                user["location"] = geoPoint
+                user.saveInBackground()
+   
             } else {
                 println(error)
-                println("something went wrong")
             }
         }
+        
+//        addPerson("https://pbs.twimg.com/media/CLmRStwWwAALDQU.jpg")
+        addPerson()
     }
+    
+    
+    func addPerson() {
+        var newUser = PFUser() as PFUser!
+        var imgURL: NSURL = NSURL(string: "https://pbs.twimg.com/media/CLmRStwWwAALDQU.jpg")!
+        let request: NSURLRequest = NSURLRequest(URL: imgURL)
+        NSURLConnection.sendAsynchronousRequest(
+            request, queue: NSOperationQueue.mainQueue(),
+            completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+                if error == nil {
+                    var image = UIImage(data: data)
+                    var file = PFFile(data: UIImageJPEGRepresentation(image, 1.0))
+                    println(file)
+                    newUser["picture"] = file
+                    newUser["gender"] = "female"
+                    var lat = Double(37 + self.i)
+                    var lon = Double(-122 + self.i)
+                    self.i = self.i + 10
+                    var location = PFGeoPoint(latitude: lat, longitude: lon)
+                    newUser["location"] = location
+                    newUser.username = "\(self.i)"
+                    newUser.password = "password"
+                    newUser.signUp()
+                }
+        })
+       
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
