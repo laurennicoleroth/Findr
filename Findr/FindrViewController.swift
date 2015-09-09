@@ -14,18 +14,6 @@ class FindrViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-        //Create some men
-//        addPerson("http://vignette4.wikia.nocookie.net/charmed/images/3/37/Jon-hamm-435.jpg/revision/latest?cb=20130906140210", gender: "Male", preference: "Women", fullname: "Jon Hamm")
-//        addPerson("http://img2.timeinc.net/people/i/2005/specials/beauties05/beautiespoll/cowen.jpg", gender: "Male",  preference: "Women", fullname: "Clive Owen")
-//        addPerson("http://images2.static-bluray.com/products/22/2874_1_front.jpg", gender: "Male", preference: "Women", fullname: "Cillian Murphy")
-//         addPerson("http://parade.com/wp-content/uploads/2014/05/05-18-14-Sunday-with-Patrick-Stewart-ftr.jpg", gender: "Male", preference: "Women", fullname: "Patrick Stewart")
-        
-        //Create some women
-//        addPerson("http://i.huffpost.com/gadgets/slideshows/412452/slide_412452_5206684_free.jpg", gender: "Female",  preference: "Men", fullname: "Angelina Jolie")
-//        addPerson("http://www.billboard.com/files/styles/promo_650/public/media/taylor-swift_press-2013-650.jpg", gender: "Female", preference: "Men", fullname: "Taylor Swift")
-//        addPerson("http://media2.popsugar-assets.com/files/2014/04/03/639/n/29590734/681f7f299a24848d_478045075_10.xxxlarge_2x/i/Cat-Deeley.jpg", gender: "Female", preference: "Men", fullname: "Cat Deeley")
-//        addPerson("http://i.telegraph.co.uk/multimedia/archive/02179/1989_2179531a.jpg", gender: "Female", preference: "Men", fullname: "Claudia Schiffer")
     }
     
     
