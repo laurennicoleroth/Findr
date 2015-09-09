@@ -41,31 +41,20 @@ class SignUpViewController: UIViewController {
             currentUser["preference"] = "men"
         }
         
-        facebookGraphRequest()
+        currentUser.saveInBackground()
+        
+        storeFacebookData()
+        storeLocation()
     }
     
     
-//    var imgURL: NSURL = NSURL(string: "https://pbs.twimg.com/media/CLmRStwWwAALDQU.jpg")!
-//    let request: NSURLRequest = NSURLRequest(URL: imgURL)
-//    NSURLConnection.sendAsynchronousRequest(
-//    request, queue: NSOperationQueue.mainQueue(),
-//    completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
-//    if error == nil {
-//    var image = UIImage(data: data)
-//    var file = PFFile(data: UIImageJPEGRepresentation(image, 1.0))
-//    newUser["picture"] = file
-
-//    }
-    
-    
-    func facebookGraphRequest() {
+    func storeFacebookData() {
         let currentUser = PFUser.currentUser() as PFUser!
         var fbRequest = FBSDKGraphRequest(graphPath: "me", parameters:
             ["fields": "id, email, gender, picture, first_name, last_name, bio"])
         fbRequest.startWithCompletionHandler({ (FBSDKGraphRequestConnection, result, error) -> Void in
-            
             if (error == nil && result != nil) {
-                let facebookData = result as! NSDictionary //FACEBOOK DATA IN DICTIONARY
+                let facebookData = result as! NSDictionary
                 let userEmail = (facebookData.objectForKey("email") as! String)
                 let userGender = (facebookData.objectForKey("gender") as! String)
                 let userFirstName = (facebookData.objectForKey("first_name") as! String)
@@ -81,7 +70,6 @@ class SignUpViewController: UIViewController {
                         if error == nil {
                             var image = UIImage(data: data)
                             var file = PFFile(data: UIImageJPEGRepresentation(image, 1.0))
-                            println(file)
                             currentUser["picture"] = file
                             currentUser["fullname"] = userFirstName + " " + userLastName
                             currentUser["gender"] = userGender
@@ -95,6 +83,20 @@ class SignUpViewController: UIViewController {
             
         })
         
+    }
+    
+    func storeLocation() {
+        PFGeoPoint.geoPointForCurrentLocationInBackground {
+            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+            if error == nil {
+                var user = PFUser.currentUser() as PFUser!
+                user["location"] = geoPoint
+                user.saveInBackground()
+                
+            } else {
+                println(error)
+            }
+        }
     }
 
     /*

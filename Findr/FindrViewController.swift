@@ -11,31 +11,28 @@ import UIKit
 class FindrViewController: UIViewController {
     
     var xFromCenter:CGFloat = 0
-    var i = 2
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        PFGeoPoint.geoPointForCurrentLocationInBackground {
-            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
-            if error == nil {
-                var user = PFUser.currentUser() as PFUser!
-                user["location"] = geoPoint
-                user.saveInBackground()
-   
-            } else {
-                println(error)
-            }
-        }
+      
+        //Create some men
+//        addPerson("http://vignette4.wikia.nocookie.net/charmed/images/3/37/Jon-hamm-435.jpg/revision/latest?cb=20130906140210", gender: "Male", preference: "Women", fullname: "Jon Hamm")
+//        addPerson("http://img2.timeinc.net/people/i/2005/specials/beauties05/beautiespoll/cowen.jpg", gender: "Male",  preference: "Women", fullname: "Clive Owen")
+//        addPerson("http://images2.static-bluray.com/products/22/2874_1_front.jpg", gender: "Male", preference: "Women", fullname: "Cillian Murphy")
+//         addPerson("http://parade.com/wp-content/uploads/2014/05/05-18-14-Sunday-with-Patrick-Stewart-ftr.jpg", gender: "Male", preference: "Women", fullname: "Patrick Stewart")
         
-//        addPerson("https://pbs.twimg.com/media/CLmRStwWwAALDQU.jpg")
-        addPerson()
+        //Create some women
+//        addPerson("http://i.huffpost.com/gadgets/slideshows/412452/slide_412452_5206684_free.jpg", gender: "Female",  preference: "Men", fullname: "Angelina Jolie")
+//        addPerson("http://www.billboard.com/files/styles/promo_650/public/media/taylor-swift_press-2013-650.jpg", gender: "Female", preference: "Men", fullname: "Taylor Swift")
+//        addPerson("http://media2.popsugar-assets.com/files/2014/04/03/639/n/29590734/681f7f299a24848d_478045075_10.xxxlarge_2x/i/Cat-Deeley.jpg", gender: "Female", preference: "Men", fullname: "Cat Deeley")
+//        addPerson("http://i.telegraph.co.uk/multimedia/archive/02179/1989_2179531a.jpg", gender: "Female", preference: "Men", fullname: "Claudia Schiffer")
     }
     
     
-    func addPerson() {
+    func addPerson(url: String, gender: String, preference: String, fullname: String) {
         var newUser = PFUser() as PFUser!
-        var imgURL: NSURL = NSURL(string: "https://pbs.twimg.com/media/CLmRStwWwAALDQU.jpg")!
+        var imgURL: NSURL = NSURL(string: url)!
+        
         let request: NSURLRequest = NSURLRequest(URL: imgURL)
         NSURLConnection.sendAsynchronousRequest(
             request, queue: NSOperationQueue.mainQueue(),
@@ -43,22 +40,25 @@ class FindrViewController: UIViewController {
                 if error == nil {
                     var image = UIImage(data: data)
                     var file = PFFile(data: UIImageJPEGRepresentation(image, 1.0))
-                    println(file)
                     newUser["picture"] = file
-                    newUser["gender"] = "female"
-                    var lat = Double(37 + self.i)
-                    var lon = Double(-122 + self.i)
-                    self.i = self.i + 10
+                    newUser["gender"] = gender
+                    newUser["preference"] = preference
+                    newUser["fullname"] = fullname
+                    var lat = Double(Int(arc4random_uniform(100)+1))
+                    var lon = Double(Int(arc4random_uniform(100)+1))
                     var location = PFGeoPoint(latitude: lat, longitude: lon)
                     newUser["location"] = location
-                    newUser.username = "\(self.i)"
+                    var name = "\(fullname)" + String(Int(arc4random_uniform(100)+1))
+                    let username = name.stringByReplacingOccurrencesOfString(" ", withString: "").lowercaseString
+                    newUser.username = username
                     newUser.password = "password"
                     newUser.signUp()
+                } else {
+                    println(error)
                 }
         })
        
     }
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
