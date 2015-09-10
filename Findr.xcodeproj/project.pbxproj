@@ -36,6 +36,7 @@
 		96F440D71BA22298007B51F1 /* DraggableViewBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F440D61BA22298007B51F1 /* DraggableViewBackground.swift */; };
 		96F440D91BA222D1007B51F1 /* DraggableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F440D81BA222D1007B51F1 /* DraggableView.swift */; };
 		96F440DB1BA2234F007B51F1 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F440DA1BA2234F007B51F1 /* OverlayView.swift */; };
+		96F440DD1BA227EB007B51F1 /* avatar-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F440DC1BA227EB007B51F1 /* avatar-placeholder.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		96F440D61BA22298007B51F1 /* DraggableViewBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableViewBackground.swift; sourceTree = "<group>"; };
 		96F440D81BA222D1007B51F1 /* DraggableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableView.swift; sourceTree = "<group>"; };
 		96F440DA1BA2234F007B51F1 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		96F440DC1BA227EB007B51F1 /* avatar-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "avatar-placeholder.png"; path = "../../../../Desktop/avatar-placeholder.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 				96F440D61BA22298007B51F1 /* DraggableViewBackground.swift */,
 				96F440D81BA222D1007B51F1 /* DraggableView.swift */,
 				96F440DA1BA2234F007B51F1 /* OverlayView.swift */,
+				96F440DC1BA227EB007B51F1 /* avatar-placeholder.png */,
 				963C31A01B9A06D600231309 /* FindrViewController.swift */,
 				9674E8BC1B90EE3900A281AA /* Images.xcassets */,
 				9674E8BE1B90EE3900A281AA /* LaunchScreen.xib */,
@@ -292,6 +295,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96F440DD1BA227EB007B51F1 /* avatar-placeholder.png in Resources */,
 				9674E8BB1B90EE3900A281AA /* Main.storyboard in Resources */,
 				9674E8C01B90EE3900A281AA /* LaunchScreen.xib in Resources */,
 				9674E8BD1B90EE3900A281AA /* Images.xcassets in Resources */,

@@ -39,17 +39,16 @@ class DraggableView: UIView {
         
         self.setupView()
         
-        information = UILabel(frame: CGRectMake(0, 50, self.frame.size.width, 100))
-        information.text = "no info given"
-        information.textAlignment = NSTextAlignment.Center
-        information.textColor = UIColor.blackColor()
-        
         self.backgroundColor = UIColor.whiteColor()
         
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "beingDragged:")
         
         self.addGestureRecognizer(panGestureRecognizer)
-        self.addSubview(information)
+        
+        var userImage: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.frame.width, self.frame.height))
+        userImage.image = UIImage(named: "avatar-placeholder.png")
+        userImage.contentMode = UIViewContentMode.ScaleAspectFit
+        self.addSubview(userImage)
         
         overlayView = OverlayView(frame: CGRectMake(self.frame.size.width/2-100, 0, 100, 100))
         overlayView.alpha = 0
@@ -60,8 +59,8 @@ class DraggableView: UIView {
     }
     
     func setupView() -> Void {
-        self.layer.cornerRadius = 4;
-        self.layer.shadowRadius = 3;
+        self.layer.cornerRadius = 10;
+        self.layer.shadowRadius = 9;
         self.layer.shadowOpacity = 0.2;
         self.layer.shadowOffset = CGSizeMake(1, 1);
     }
@@ -131,6 +130,7 @@ class DraggableView: UIView {
                 self.removeFromSuperview()
         })
         delegate.cardSwipedRight(self)
+        println("User chosen")
     }
     
     func leftAction() -> Void {
@@ -143,6 +143,7 @@ class DraggableView: UIView {
                 self.removeFromSuperview()
         })
         delegate.cardSwipedLeft(self)
+        println("User not chosen")
     }
     
     func rightClickAction() -> Void {
