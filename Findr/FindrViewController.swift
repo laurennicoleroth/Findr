@@ -11,40 +11,47 @@ import UIKit
 class FindrViewController: UIViewController {
     
     var xFromCenter:CGFloat = 0
+    var usernames = [String]()
+    var userPictures = [PFFile]()
+    var currentUser = 0
    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        PFGeoPoint.geoPointForCurrentLocationInBackground {
-            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
-            if error == nil {
-                var user = PFUser.currentUser() as PFUser!
-                user["location"] = geoPoint
-
-                var query = PFUser.query()
-                query!.whereKey("location", nearGeoPoint:geoPoint!)
-                query!.limit = 10
-                query!.findObjectsInBackgroundWithBlock {
-                    (users: [AnyObject]?, error: NSError?) -> Void in
-                    
-                    if error == nil {
-                        // The find succeeded.
-                        println("Successfully retrieved \(users!.count) users.")
-                        // Do something with the found objects
-                        if let users = users as? [PFObject] {
-                            for user in users {
-                                println(user.objectId)
-                            }
-                        }
-                    } else {
-                        // Log details of the failure
-                        println("Error: \(error!) \(error!.userInfo!)")
-                    }
-                }
-            } else {
-                println(error)
-            }
-        }
+//        PFGeoPoint.geoPointForCurrentLocationInBackground {
+//            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+//            if error == nil {
+//                var user = PFUser.currentUser() as PFUser!
+//                user["location"] = geoPoint
+//
+//                var query = PFUser.query()
+//                query!.whereKey("location", nearGeoPoint:geoPoint!)
+//                query!.limit = 10
+//                query!.findObjectsInBackgroundWithBlock {
+//                    (users: [AnyObject]?, error: NSError?) -> Void in
+//                    
+//                    if error == nil {
+//                        // The find succeeded.
+//                        println("Successfully retrieved \(users!.count) users.")
+//                        // Do something with the found objects
+//                        if let users = users as? [PFObject] {
+//                            for user in users {
+//                                println(user.objectId)
+//                                self.usernames.append(user["username"] as! String)
+//                                self.userPictures.append(user["picture"] as! PFFile)
+//                            }
+//                        }
+//                    } else {
+//                        // Log details of the failure
+//                        println("Error: \(error!) \(error!.userInfo!)")
+//                    }
+//                }
+//            } else {
+//                println(error)
+//            }
+//        }
+        
+        
         
         loadPositiveSingle()
     }

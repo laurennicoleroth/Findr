@@ -12,6 +12,9 @@ import UIKit
 class DraggableViewBackground: UIView, DraggableViewDelegate {
     var exampleCardLabels: [String]!
     var allCards: [DraggableView]!
+    var usernames = [String]()
+    var userPictures = [PFFile]()
+    var currentUser = 0
     
     let MAX_BUFFER_SIZE = 2
     let CARD_HEIGHT: CGFloat = 386
@@ -31,12 +34,11 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         super.layoutSubviews()
+        self.loadUsers()
         self.setupView()
-        exampleCardLabels = ["User 1", "User 2", "User 3", "User 4", "User 5"]
         allCards = []
         loadedCards = []
         cardsLoadedIndex = 0
-        self.loadCards()
     }
     
     func setupView() -> Void {
@@ -54,17 +56,52 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         self.addSubview(checkButton)
     }
     
+    func loadUsers() {
+        PFGeoPoint.geoPointForCurrentLocationInBackground {
+            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+            if error == nil {
+                var user = PFUser.currentUser() as PFUser!
+                user["location"] = geoPoint
+                
+                var query = PFUser.query()
+                query!.whereKey("location", nearGeoPoint:geoPoint!)
+                query!.limit = 10
+                query!.findObjectsInBackgroundWithBlock {
+                    (users: [AnyObject]?, error: NSError?) -> Void in
+                    
+                    if error == nil {
+                        if let users = users as? [PFObject] {
+                            for user in users {
+                                self.usernames.append(user["username"] as! String)
+                                self.userPictures.append(user["picture"] as! PFFile)
+                                self.loadCards(self.usernames, userPictures: self.userPictures)
+                            }
+                        }
+                    } else {
+                        // Log details of the failure
+                        println("Error: \(error!) \(error!.userInfo!)")
+                    }
+                }
+            } else {
+                println(error)
+            }
+        }
+        
+    }
+    
     func createDraggableViewWithDataAtIndex(index: NSInteger) -> DraggableView {
         var draggableView = DraggableView(frame: CGRectMake((self.frame.size.width - CARD_WIDTH)/2, (self.frame.size.height - CARD_HEIGHT)/2, CARD_WIDTH, CARD_HEIGHT))
-//        draggableView.information.text = exampleCardLabels[index]
+//        draggableView.information.text = usernames[index]
+        println(usernames.count)
+        draggableView.username.text = usernames[index]
         draggableView.delegate = self
         return draggableView
     }
     
-    func loadCards() -> Void {
-        if exampleCardLabels.count > 0 {
-            let numLoadedCardsCap = exampleCardLabels.count > MAX_BUFFER_SIZE ? MAX_BUFFER_SIZE : exampleCardLabels.count
-            for var i = 0; i < exampleCardLabels.count; i++ {
+    func loadCards(usernames: [String], userPictures: [PFFile]) -> Void {
+        if usernames.count > 0 {
+            let numLoadedCardsCap = usernames.count > MAX_BUFFER_SIZE ? MAX_BUFFER_SIZE : usernames.count
+            for var i = 0; i < usernames.count; i++ {
                 var newCard: DraggableView = self.createDraggableViewWithDataAtIndex(i)
                 allCards.append(newCard)
                 if i < numLoadedCardsCap {

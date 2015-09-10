@@ -27,6 +27,7 @@ class DraggableView: UIView {
     var originPoint: CGPoint!
     var overlayView: OverlayView!
     var information: UILabel!
+    var username: UILabel!
     var xFromCenter: Float!
     var yFromCenter: Float!
     
@@ -45,11 +46,18 @@ class DraggableView: UIView {
         
         self.addGestureRecognizer(panGestureRecognizer)
         
+        
         var userImage: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.frame.width, self.frame.height))
         userImage.image = UIImage(named: "avatar-placeholder.png")
         userImage.contentMode = UIViewContentMode.ScaleAspectFit
         self.addSubview(userImage)
         
+        username = UILabel(frame: CGRectMake(0, 50, self.frame.size.width, 100))
+        username.text = "no info given"
+        username.textAlignment = NSTextAlignment.Center
+        username.textColor = UIColor.blackColor()
+        self.addSubview(username)
+
         overlayView = OverlayView(frame: CGRectMake(self.frame.size.width/2-100, 0, 100, 100))
         overlayView.alpha = 0
         self.addSubview(overlayView)
