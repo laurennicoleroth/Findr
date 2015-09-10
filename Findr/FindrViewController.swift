@@ -36,19 +36,22 @@ class FindrViewController: UIViewController {
     }
     
     func loadPositiveSingle() {
-        var positiveSingle: UILabel = UILabel(frame: CGRectMake(self.view.bounds.width / 2 - 100, self.view.bounds.height / 2 - 50, 200, 100))
-        positiveSingle.text = "Positive Single"
-        positiveSingle.textAlignment = NSTextAlignment.Center
-        self.view.addSubview(positiveSingle)
         
-        var gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
-        positiveSingle.addGestureRecognizer(gesture)
-        
-        positiveSingle.userInteractionEnabled = true
-        
-        var userImage: UIImageView = UIImageView(frame: CGRectMake(self.view.bounds.width / 2 - 100, self.view.bounds.height / 2 - 50, 200, 100))
-        userImage.image = UIImage(named: "placeholder-avatar.png")
-        self.view.addSubview(userImage)
+        var draggableBackground: DraggableViewBackground = DraggableViewBackground(frame: self.view.frame)
+        self.view.addSubview(draggableBackground)
+//        var positiveSingle: UILabel = UILabel(frame: CGRectMake(self.view.bounds.width / 2 - 100, self.view.bounds.height / 2 - 50, 200, 100))
+//        positiveSingle.text = "Positive Single"
+//        positiveSingle.textAlignment = NSTextAlignment.Center
+//        self.view.addSubview(positiveSingle)
+//        
+//        var gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
+//        positiveSingle.addGestureRecognizer(gesture)
+//        
+//        positiveSingle.userInteractionEnabled = true
+//        
+//        var userImage: UIImageView = UIImageView(frame: CGRectMake(self.view.bounds.width / 2 - 100, self.view.bounds.height / 2 - 50, 200, 100))
+//        userImage.image = UIImage(named: "placeholder-avatar.png")
+//        self.view.addSubview(userImage)
     }
     
     func wasDragged(gesture: UIPanGestureRecognizer) {

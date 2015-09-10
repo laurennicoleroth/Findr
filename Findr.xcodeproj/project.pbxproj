@@ -33,6 +33,9 @@
 		9674E90D1B910DAF00A281AA /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9674E90C1B910DAF00A281AA /* FBSDKCoreKit.framework */; };
 		9674E90F1B910E5D00A281AA /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9674E90E1B910E5D00A281AA /* FBSDKLoginKit.framework */; };
 		9674E96D1B9629AE00A281AA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9674E96C1B9629AE00A281AA /* SignUpViewController.swift */; };
+		96F440D71BA22298007B51F1 /* DraggableViewBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F440D61BA22298007B51F1 /* DraggableViewBackground.swift */; };
+		96F440D91BA222D1007B51F1 /* DraggableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F440D81BA222D1007B51F1 /* DraggableView.swift */; };
+		96F440DB1BA2234F007B51F1 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F440DA1BA2234F007B51F1 /* OverlayView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +81,9 @@
 		9674E90C1B910DAF00A281AA /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		9674E90E1B910E5D00A281AA /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		9674E96C1B9629AE00A281AA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		96F440D61BA22298007B51F1 /* DraggableViewBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableViewBackground.swift; sourceTree = "<group>"; };
+		96F440D81BA222D1007B51F1 /* DraggableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableView.swift; sourceTree = "<group>"; };
+		96F440DA1BA2234F007B51F1 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +147,9 @@
 				9674E8B71B90EE3900A281AA /* ViewController.swift */,
 				9674E96C1B9629AE00A281AA /* SignUpViewController.swift */,
 				9674E8B91B90EE3900A281AA /* Main.storyboard */,
+				96F440D61BA22298007B51F1 /* DraggableViewBackground.swift */,
+				96F440D81BA222D1007B51F1 /* DraggableView.swift */,
+				96F440DA1BA2234F007B51F1 /* OverlayView.swift */,
 				963C31A01B9A06D600231309 /* FindrViewController.swift */,
 				9674E8BC1B90EE3900A281AA /* Images.xcassets */,
 				9674E8BE1B90EE3900A281AA /* LaunchScreen.xib */,
@@ -303,10 +312,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96F440D91BA222D1007B51F1 /* DraggableView.swift in Sources */,
 				9674E96D1B9629AE00A281AA /* SignUpViewController.swift in Sources */,
+				96F440DB1BA2234F007B51F1 /* OverlayView.swift in Sources */,
 				9674E8B81B90EE3900A281AA /* ViewController.swift in Sources */,
 				963C31A11B9A06D600231309 /* FindrViewController.swift in Sources */,
 				9674E8B61B90EE3900A281AA /* AppDelegate.swift in Sources */,
+				96F440D71BA22298007B51F1 /* DraggableViewBackground.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
