@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 let ACTION_MARGIN: Float = 120      //%%% distance from center where the action applies. Higher = swipe further in order for the action to be called
-let SCALE_STRENGTH: Float = 4       //%%% how quickly the card shrinks. Higher = slower shrinking
-let SCALE_MAX:Float = 0.93          //%%% upper bar for how much the card shrinks. Higher = shrinks less
+let SCALE_STRENGTH: Float = 2       //%%% how quickly the card shrinks. Higher = slower shrinking
+let SCALE_MAX:Float = 0.50          //%%% upper bar for how much the card shrinks. Higher = shrinks less
 let ROTATION_MAX: Float = 1         //%%% the maximum rotation allowed in radians.  Higher = card can keep rotating longer
 let ROTATION_STRENGTH: Float = 320  //%%% strength of rotation. Higher = weaker rotation
 let ROTATION_ANGLE: Float = 3.14/8  //%%% Higher = stronger rotation angle

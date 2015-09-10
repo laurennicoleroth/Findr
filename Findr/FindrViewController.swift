@@ -20,7 +20,27 @@ class FindrViewController: UIViewController {
             if error == nil {
                 var user = PFUser.currentUser() as PFUser!
                 user["location"] = geoPoint
-                user.saveInBackground()
+
+                var query = PFUser.query()
+                query!.whereKey("location", nearGeoPoint:geoPoint!)
+                query!.limit = 10
+                query!.findObjectsInBackgroundWithBlock {
+                    (users: [AnyObject]?, error: NSError?) -> Void in
+                    
+                    if error == nil {
+                        // The find succeeded.
+                        println("Successfully retrieved \(users!.count) users.")
+                        // Do something with the found objects
+                        if let users = users as? [PFObject] {
+                            for user in users {
+                                println(user.objectId)
+                            }
+                        }
+                    } else {
+                        // Log details of the failure
+                        println("Error: \(error!) \(error!.userInfo!)")
+                    }
+                }
             } else {
                 println(error)
             }
@@ -39,19 +59,6 @@ class FindrViewController: UIViewController {
         
         var draggableBackground: DraggableViewBackground = DraggableViewBackground(frame: self.view.frame)
         self.view.addSubview(draggableBackground)
-//        var positiveSingle: UILabel = UILabel(frame: CGRectMake(self.view.bounds.width / 2 - 100, self.view.bounds.height / 2 - 50, 200, 100))
-//        positiveSingle.text = "Positive Single"
-//        positiveSingle.textAlignment = NSTextAlignment.Center
-//        self.view.addSubview(positiveSingle)
-//        
-//        var gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
-//        positiveSingle.addGestureRecognizer(gesture)
-//        
-//        positiveSingle.userInteractionEnabled = true
-//        
-//        var userImage: UIImageView = UIImageView(frame: CGRectMake(self.view.bounds.width / 2 - 100, self.view.bounds.height / 2 - 50, 200, 100))
-//        userImage.image = UIImage(named: "placeholder-avatar.png")
-//        self.view.addSubview(userImage)
     }
     
     func wasDragged(gesture: UIPanGestureRecognizer) {
