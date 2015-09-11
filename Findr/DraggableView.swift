@@ -27,6 +27,7 @@ class DraggableView: UIView {
     var originPoint: CGPoint!
     var overlayView: OverlayView!
     var information: UILabel!
+    var userPicFile: PFFile!
     var username: UILabel!
     var xFromCenter: Float!
     var yFromCenter: Float!
@@ -47,10 +48,23 @@ class DraggableView: UIView {
         self.addGestureRecognizer(panGestureRecognizer)
         
         
-        var userImage: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.frame.width, self.frame.height))
-        userImage.image = UIImage(named: "avatar-placeholder.png")
-        userImage.contentMode = UIViewContentMode.ScaleAspectFit
-        self.addSubview(userImage)
+        var userPicture: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.frame.width, self.frame.height))
+
+        if userPicFile != nil {
+//          userPicture.image = userPic
+            if let userPicture = userPicFile {
+                userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+                    if (error == nil) {
+                        var image = UIImage(data: imageData!)
+                        println(image)
+                    }
+                }
+            }
+        } else {
+          userPicture.image = UIImage(named: "avatar-placeholder.png")
+        }
+        userPicture.contentMode = UIViewContentMode.ScaleAspectFit
+        self.addSubview(userPicture)
         
         username = UILabel(frame: CGRectMake(0, 50, self.frame.size.width, 100))
         username.text = "no info given"

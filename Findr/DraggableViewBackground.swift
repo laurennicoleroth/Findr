@@ -13,6 +13,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     var exampleCardLabels: [String]!
     var allCards: [DraggableView]!
     var usernames = [String]()
+    var fullnames = [String]()
     var userPictures = [PFFile]()
     var currentUser = 0
     
@@ -73,9 +74,10 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
                         if let users = users as? [PFObject] {
                             for user in users {
                                 self.usernames.append(user["username"] as! String)
+                                self.fullnames.append(user["fullname"] as! String)
                                 self.userPictures.append(user["picture"] as! PFFile)
-                                self.loadCards(self.usernames, userPictures: self.userPictures)
                             }
+                            self.loadCards(self.usernames, userPictures: self.userPictures, fullNames: self.fullnames)
                         }
                     } else {
                         // Log details of the failure
@@ -91,14 +93,22 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     
     func createDraggableViewWithDataAtIndex(index: NSInteger) -> DraggableView {
         var draggableView = DraggableView(frame: CGRectMake((self.frame.size.width - CARD_WIDTH)/2, (self.frame.size.height - CARD_HEIGHT)/2, CARD_WIDTH, CARD_HEIGHT))
-//        draggableView.information.text = usernames[index]
         println(usernames.count)
-        draggableView.username.text = usernames[index]
+        draggableView.username.text = fullnames[index]
+//        if let userPicture = userPictures[index] as PFFile? {
+//            userPicture.getDataInBackgroundWithBlock { (imageData: NSData?, error: NSError?) -> Void in
+//                if (error == nil) {
+//                    var image = UIImage(data: imageData!)
+//                    draggableView.userPic = userPicture
+//                    println(draggableView.userPic)
+//                }
+//            }
+//        }
         draggableView.delegate = self
         return draggableView
     }
     
-    func loadCards(usernames: [String], userPictures: [PFFile]) -> Void {
+    func loadCards(usernames: [String], userPictures: [PFFile], fullNames: [String]) -> Void {
         if usernames.count > 0 {
             let numLoadedCardsCap = usernames.count > MAX_BUFFER_SIZE ? MAX_BUFFER_SIZE : usernames.count
             for var i = 0; i < usernames.count; i++ {
