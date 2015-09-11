@@ -25,9 +25,9 @@ class FindrViewController: UIViewController {
                 user["location"] = geoPoint
                 println(PFUser.currentUser()!["preference"]!)
                 var query = PFUser.query()
-//                query!.whereKey("location", nearGeoPoint:geoPoint!)
+//    TODO:            query!.whereKey("location", nearGeoPoint:geoPoint!)
                 query!.whereKey("username", notEqualTo: PFUser.currentUser()!.username!)
-                query!.whereKey("gender", equalTo: "Female")
+                query!.whereKey("gender", equalTo: "Male")
                 query!.limit = 10
                 query!.findObjectsInBackgroundWithBlock {
                     (users: [AnyObject]?, error: NSError?) -> Void in
@@ -40,6 +40,7 @@ class FindrViewController: UIViewController {
                                 println(user.objectId)
                                 self.usernames.append(user["username"] as! String)
                                 self.userPictures.append(user["picture"] as! PFFile)
+                                
                             }
                             
                             println(self.currentUser)
@@ -73,7 +74,7 @@ class FindrViewController: UIViewController {
                     }
                 }
             } else {
-                println(error)
+                println("No more users")
             }
         }
         
@@ -105,48 +106,71 @@ class FindrViewController: UIViewController {
         gesture.setTranslation(CGPointZero, inView: self.view)
         var rotation:CGAffineTransform = CGAffineTransformMakeRotation(xFromCenter / 200)
         var stretch:CGAffineTransform = CGAffineTransformScale(rotation, scale, scale)
-
         label.transform = stretch
-        if label.center.x < 100 {
-            println("Not Chosen")
-        } else if label.center.x > self.view.bounds.width - 100 {
-            println("Chosen")
-        }
+       
         
         if gesture.state == UIGestureRecognizerState.Ended {
+            var username = self.usernames[self.currentUser]
+            var user = PFUser.currentUser() as PFUser!
             
-            self.currentUser++
+            if label.center.x < 100 {
+                println("Rejected")
+                
+                println(user)
+                println(username)
+//                user.addUniqueObject(username, forKey:"rejected")
+//                user.saveInBackground()
+                
+                user["rejected"] = username
+                user.saveInBackground()
+                
+                self.currentUser++
+                
+            } else if label.center.x > self.view.bounds.width - 100 {
+                println("Accepted")
+                
+                println(user)
+                println(username)
+//                user.addUniqueObject(username, forKey:"accepted")
+//                user.saveInBackground()
+                user["accepted"] = username
+                user.saveInBackground()
+
+                self.currentUser++
+            }
             
             label.removeFromSuperview()
             
-            var userImage: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
+            if self.currentUser < self.userPictures.count {
             
-            let userImageFile = self.userPictures[self.currentUser] as PFFile
-            userImageFile.getDataInBackgroundWithBlock {
-                (imageData: NSData?, error: NSError?) -> Void in
-                if error == nil {
-                    if let imageData = imageData {
-                        let image = UIImage(data:imageData)
-                        
-                        var userImage: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-                        userImage.image = image
-                        userImage.contentMode = UIViewContentMode.ScaleAspectFit
-                        self.view.addSubview(userImage)
-                        
-                        var gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
-                        userImage.addGestureRecognizer(gesture)
-                        
-                        userImage.userInteractionEnabled = true
+                var userImage: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
+                
+                let userImageFile = self.userPictures[self.currentUser] as PFFile
+                userImageFile.getDataInBackgroundWithBlock {
+                    (imageData: NSData?, error: NSError?) -> Void in
+                    if error == nil {
+                        if let imageData = imageData {
+                            let image = UIImage(data:imageData)
+                            
+                            var userImage: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
+                            userImage.image = image
+                            userImage.contentMode = UIViewContentMode.ScaleAspectFit
+                            self.view.addSubview(userImage)
+                            
+                            var gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
+                            userImage.addGestureRecognizer(gesture)
+                            
+                            userImage.userInteractionEnabled = true
+                            
+                            self.xFromCenter = 0
+                        }
                     }
                 }
+            } else {
+                println("No more users")
             }
             
-            var gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
-            userImage.addGestureRecognizer(gesture)
             
-            userImage.userInteractionEnabled = true
-            
-            xFromCenter = 0
         }
     }
 
