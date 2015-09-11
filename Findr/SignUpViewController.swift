@@ -35,10 +35,10 @@ class SignUpViewController: UIViewController {
         var currentUser = PFUser.currentUser() as PFUser!
         
         if genderSwitch.on {
-            currentUser["preference"] = "women"
+            currentUser["preference"] = "Women"
 
         } else {
-            currentUser["preference"] = "men"
+            currentUser["preference"] = "Men"
         }
         
         currentUser.saveInBackground()

@@ -23,9 +23,11 @@ class FindrViewController: UIViewController {
             if error == nil {
                 var user = PFUser.currentUser() as PFUser!
                 user["location"] = geoPoint
-
+                println(PFUser.currentUser()!["preference"]!)
                 var query = PFUser.query()
-                query!.whereKey("location", nearGeoPoint:geoPoint!)
+//                query!.whereKey("location", nearGeoPoint:geoPoint!)
+                query!.whereKey("username", notEqualTo: PFUser.currentUser()!.username!)
+                query!.whereKey("gender", equalTo: "Female")
                 query!.limit = 10
                 query!.findObjectsInBackgroundWithBlock {
                     (users: [AnyObject]?, error: NSError?) -> Void in
@@ -33,16 +35,16 @@ class FindrViewController: UIViewController {
                     if error == nil {
                         // The find succeeded.
                         println("Successfully retrieved \(users!.count) users.")
-                        // Do something with the found objects
                         if let users = users as? [PFObject] {
                             for user in users {
                                 println(user.objectId)
                                 self.usernames.append(user["username"] as! String)
                                 self.userPictures.append(user["picture"] as! PFFile)
                             }
-                            println(self.userPictures.count)
                             
-                            let userImageFile = self.userPictures[0] as PFFile
+                            println(self.currentUser)
+                            
+                            let userImageFile = self.userPictures[self.currentUser] as PFFile
                             userImageFile.getDataInBackgroundWithBlock {
                                 (imageData: NSData?, error: NSError?) -> Void in
                                 if error == nil {
@@ -113,12 +115,31 @@ class FindrViewController: UIViewController {
         
         if gesture.state == UIGestureRecognizerState.Ended {
             
+            self.currentUser++
+            
             label.removeFromSuperview()
             
             var userImage: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-            userImage.image = UIImage(named: "avatar-placeholder.png")
-            userImage.contentMode = UIViewContentMode.ScaleAspectFit
-            self.view.addSubview(userImage)
+            
+            let userImageFile = self.userPictures[self.currentUser] as PFFile
+            userImageFile.getDataInBackgroundWithBlock {
+                (imageData: NSData?, error: NSError?) -> Void in
+                if error == nil {
+                    if let imageData = imageData {
+                        let image = UIImage(data:imageData)
+                        
+                        var userImage: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
+                        userImage.image = image
+                        userImage.contentMode = UIViewContentMode.ScaleAspectFit
+                        self.view.addSubview(userImage)
+                        
+                        var gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
+                        userImage.addGestureRecognizer(gesture)
+                        
+                        userImage.userInteractionEnabled = true
+                    }
+                }
+            }
             
             var gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
             userImage.addGestureRecognizer(gesture)
