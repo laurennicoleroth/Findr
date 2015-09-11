@@ -40,17 +40,30 @@ class FindrViewController: UIViewController {
                                 self.usernames.append(user["username"] as! String)
                                 self.userPictures.append(user["picture"] as! PFFile)
                             }
+                            println(self.userPictures.count)
+                            
+                            let userImageFile = self.userPictures[0] as PFFile
+                            userImageFile.getDataInBackgroundWithBlock {
+                                (imageData: NSData?, error: NSError?) -> Void in
+                                if error == nil {
+                                    if let imageData = imageData {
+                                        let image = UIImage(data:imageData)
+                                        
+                                        var userImage: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
+                                        userImage.image = image
+                                        userImage.contentMode = UIViewContentMode.ScaleAspectFit
+                                        self.view.addSubview(userImage)
+                                       
+                                        var gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
+                                        userImage.addGestureRecognizer(gesture)
+                                     
+                                        userImage.userInteractionEnabled = true
+                                    }
+                                }
+                            }
                         }
                         
-                        var userImage: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-                        userImage.image = UIImage(named: "avatar-placeholder.png")
-                        userImage.contentMode = UIViewContentMode.ScaleAspectFit
-                        self.view.addSubview(userImage)
                         
-                        var gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
-                        userImage.addGestureRecognizer(gesture)
-                        
-                        userImage.userInteractionEnabled = true
                         
                     } else {
                         // Log details of the failure
@@ -87,23 +100,15 @@ class FindrViewController: UIViewController {
         var scale = min(100 / abs(xFromCenter), 1)
         
         label.center = CGPoint(x: label.center.x + translation.x, y: label.center.y + translation.y)
-        
         gesture.setTranslation(CGPointZero, inView: self.view)
-        
         var rotation:CGAffineTransform = CGAffineTransformMakeRotation(xFromCenter / 200)
-        
         var stretch:CGAffineTransform = CGAffineTransformScale(rotation, scale, scale)
-        
+
         label.transform = stretch
-        
         if label.center.x < 100 {
-            
             println("Not Chosen")
-            
         } else if label.center.x > self.view.bounds.width - 100 {
-            
             println("Chosen")
-            
         }
         
         if gesture.state == UIGestureRecognizerState.Ended {
