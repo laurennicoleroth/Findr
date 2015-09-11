@@ -18,42 +18,51 @@ class FindrViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        PFGeoPoint.geoPointForCurrentLocationInBackground {
-//            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
-//            if error == nil {
-//                var user = PFUser.currentUser() as PFUser!
-//                user["location"] = geoPoint
-//
-//                var query = PFUser.query()
-//                query!.whereKey("location", nearGeoPoint:geoPoint!)
-//                query!.limit = 10
-//                query!.findObjectsInBackgroundWithBlock {
-//                    (users: [AnyObject]?, error: NSError?) -> Void in
-//                    
-//                    if error == nil {
-//                        // The find succeeded.
-//                        println("Successfully retrieved \(users!.count) users.")
-//                        // Do something with the found objects
-//                        if let users = users as? [PFObject] {
-//                            for user in users {
-//                                println(user.objectId)
-//                                self.usernames.append(user["username"] as! String)
-//                                self.userPictures.append(user["picture"] as! PFFile)
-//                            }
-//                        }
-//                    } else {
-//                        // Log details of the failure
-//                        println("Error: \(error!) \(error!.userInfo!)")
-//                    }
-//                }
-//            } else {
-//                println(error)
-//            }
-//        }
+        PFGeoPoint.geoPointForCurrentLocationInBackground {
+            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+            if error == nil {
+                var user = PFUser.currentUser() as PFUser!
+                user["location"] = geoPoint
+
+                var query = PFUser.query()
+                query!.whereKey("location", nearGeoPoint:geoPoint!)
+                query!.limit = 10
+                query!.findObjectsInBackgroundWithBlock {
+                    (users: [AnyObject]?, error: NSError?) -> Void in
+                    
+                    if error == nil {
+                        // The find succeeded.
+                        println("Successfully retrieved \(users!.count) users.")
+                        // Do something with the found objects
+                        if let users = users as? [PFObject] {
+                            for user in users {
+                                println(user.objectId)
+                                self.usernames.append(user["username"] as! String)
+                                self.userPictures.append(user["picture"] as! PFFile)
+                            }
+                        }
+                        
+                        var userImage: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
+                        userImage.image = UIImage(named: "avatar-placeholder.png")
+                        userImage.contentMode = UIViewContentMode.ScaleAspectFit
+                        self.view.addSubview(userImage)
+                        
+                        var gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
+                        userImage.addGestureRecognizer(gesture)
+                        
+                        userImage.userInteractionEnabled = true
+                        
+                    } else {
+                        // Log details of the failure
+                        println("Error: \(error!) \(error!.userInfo!)")
+                    }
+                }
+            } else {
+                println(error)
+            }
+        }
         
-        
-        
-        loadPositiveSingle()
+//        loadPositiveSingle()
     }
 
 
@@ -71,38 +80,47 @@ class FindrViewController: UIViewController {
     func wasDragged(gesture: UIPanGestureRecognizer) {
         
         let translation = gesture.translationInView(self.view)
-        var positiveSingle = gesture.view!
+        var label = gesture.view!
         
         xFromCenter += translation.x
         
         var scale = min(100 / abs(xFromCenter), 1)
         
-        positiveSingle.center = CGPoint(x: positiveSingle.center.x + translation.x, y: positiveSingle.center.y + translation.y)
+        label.center = CGPoint(x: label.center.x + translation.x, y: label.center.y + translation.y)
         
         gesture.setTranslation(CGPointZero, inView: self.view)
         
         var rotation:CGAffineTransform = CGAffineTransformMakeRotation(xFromCenter / 200)
-        positiveSingle.transform = rotation
         
         var stretch:CGAffineTransform = CGAffineTransformScale(rotation, scale, scale)
         
-        positiveSingle.transform = stretch
+        label.transform = stretch
         
-        if positiveSingle.center.x < 100 {
+        if label.center.x < 100 {
+            
             println("Not Chosen")
-        } else if positiveSingle.center.x > self.view.bounds.width - 100 {
+            
+        } else if label.center.x > self.view.bounds.width - 100 {
+            
             println("Chosen")
+            
         }
         
         if gesture.state == UIGestureRecognizerState.Ended {
             
-            positiveSingle.center = CGPointMake(self.view.bounds.width / 2, self.view.bounds.height / 2)
+            label.removeFromSuperview()
             
-            scale = max(abs(xFromCenter)/100, 1)
-            rotation = CGAffineTransformMakeRotation(0)
-            stretch = CGAffineTransformScale(rotation, scale, scale)
+            var userImage: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
+            userImage.image = UIImage(named: "avatar-placeholder.png")
+            userImage.contentMode = UIViewContentMode.ScaleAspectFit
+            self.view.addSubview(userImage)
             
-            positiveSingle.transform = stretch
+            var gesture = UIPanGestureRecognizer(target: self, action: Selector("wasDragged:"))
+            userImage.addGestureRecognizer(gesture)
+            
+            userImage.userInteractionEnabled = true
+            
+            xFromCenter = 0
         }
     }
 
