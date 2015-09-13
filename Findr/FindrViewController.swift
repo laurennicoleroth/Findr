@@ -118,11 +118,15 @@ class FindrViewController: UIViewController {
                 
                 println(user)
                 println(username)
-//                user.addUniqueObject(username, forKey:"rejected")
-//                user.saveInBackground()
-                
-                user["rejected"] = username
-                user.saveInBackground()
+                user.addUniqueObject(username, forKey:"rejected")
+                user.saveInBackgroundWithBlock {
+                    (success: Bool, error: NSError?) -> Void in
+                    if (success) {
+                        println("success")
+                    } else {
+                        println("failure")
+                    }
+                }
                 
                 self.currentUser++
                 
@@ -133,8 +137,6 @@ class FindrViewController: UIViewController {
                 println(username)
 //                user.addUniqueObject(username, forKey:"accepted")
 //                user.saveInBackground()
-                user["accepted"] = username
-                user.saveInBackground()
 
                 self.currentUser++
             }
