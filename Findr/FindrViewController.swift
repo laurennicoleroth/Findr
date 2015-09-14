@@ -13,10 +13,14 @@ class FindrViewController: UIViewController {
     var xFromCenter:CGFloat = 0
     var usernames = [String]()
     var userPictures = [PFFile]()
+    var rejectedUsers = [String]()
+    var acceptedUsers = [String]()
     var currentUser = 0
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var user = PFUser.currentUser()
 
         PFGeoPoint.geoPointForCurrentLocationInBackground {
             (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
@@ -42,8 +46,6 @@ class FindrViewController: UIViewController {
                                 self.userPictures.append(user["picture"] as! PFFile)
                                 
                             }
-                            
-                            println(self.currentUser)
                             
                             let userImageFile = self.userPictures[self.currentUser] as PFFile
                             userImageFile.getDataInBackgroundWithBlock {
@@ -80,6 +82,8 @@ class FindrViewController: UIViewController {
         
 //        loadPositiveSingle()
     }
+    
+   
 
 
     override func didReceiveMemoryWarning() {
@@ -116,27 +120,14 @@ class FindrViewController: UIViewController {
             if label.center.x < 100 {
                 println("Rejected")
                 
-                println(user)
-                println(username)
-                user.addUniqueObject(username, forKey:"rejected")
-                user.saveInBackgroundWithBlock {
-                    (success: Bool, error: NSError?) -> Void in
-                    if (success) {
-                        println("success")
-                    } else {
-                        println("failure")
-                    }
-                }
+                sendActivity("Reject", recipient: username)
                 
                 self.currentUser++
                 
             } else if label.center.x > self.view.bounds.width - 100 {
-                println("Accepted")
+                println("Accept")
                 
-                println(user)
-                println(username)
-//                user.addUniqueObject(username, forKey:"accepted")
-//                user.saveInBackground()
+                sendActivity("Accept", recipient: username)
 
                 self.currentUser++
             }
@@ -174,6 +165,17 @@ class FindrViewController: UIViewController {
             
             
         }
+    }
+    
+    func sendActivity(type: String, recipient: String) {
+        
+        
+
+        var activity = PFObject(className:"Activity")
+        activity["type"] = type
+        activity["initiator"] = PFUser.currentUser()?.username
+        activity["recipient"] = recipient
+        activity.saveInBackground()
     }
 
     /*
